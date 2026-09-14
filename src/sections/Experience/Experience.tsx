@@ -46,9 +46,9 @@ export function Experience() {
                     {entries.map(entry => (
                         <li key={entry.id} className={styles.step}>
                             <span className={styles.dot} aria-hidden="true" />
-                            <motion.article initial={reduceMotion ? false : { opacity: 0 }}
-                                whileInView={{ opacity: 1 }} viewport={revealViewport}
-                                transition={reduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}>
+                            <motion.article initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}
+                                transition={reduceMotion ? { duration: 0 } : revealSpring}>
                                 <p className={styles.date}>{t(entry.date)}</p>
                                 <h3 className={styles.role}>{t(entry.title)}</h3>
                                 <p className={styles.subtitle}>
