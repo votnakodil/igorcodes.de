@@ -1,0 +1,141 @@
+.insomnia-poster {
+    width: 62.5%;
+}
+
+.insomnia-info {
+    width: 37.5%;
+}
+
+.insomnia-about {
+    width: 35.3%;
+}
+
+.insomnia-gallery {
+    width: 64.7%;
+    padding-left: 6.5%;
+}
+
+.insomnia-image {
+    width: 100%;
+    aspect-ratio: 2.5 / 1.36;
+    border-radius: 8px;
+}
+
+.gallery-image {
+    width: 47.5%;
+    border-radius: 8px;
+    aspect-ratio: 2 / 1.09;
+}
+
+.btn-orange-gradient {
+    background-image: linear-gradient(to right, #FD5430, #F78121, #F19518);
+}
+
+.insomnia-button-style {
+    width: 36%;
+    border-radius: 15px;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .insomnia-poster {
+        width: 100%;
+    }
+
+    .insomnia-image {
+        aspect-ratio: 2 / 0.65;
+        object-fit: cover;
+    }
+
+    .insomnia-info {
+        width: 100%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .insomnia-about {
+        width: 100%;
+    }
+
+    .insomnia-gallery {
+        width: 100%;
+        padding: 0;
+    }
+
+    .gallery-image {
+        width: 20%;
+    }
+
+    .insomnia-button-style {
+        width: 45%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .insomnia-poster {
+        width: 100%;
+    }
+
+    .insomnia-image {
+        aspect-ratio: 2 / 0.65;
+        object-fit: cover;
+    }
+
+    .insomnia-info {
+        width: 100%;
+        padding-left: 23%;
+        padding-right: 23%;
+    }
+
+    .insomnia-about {
+        width: 100%;
+    }
+
+    .insomnia-gallery {
+        width: 100%;
+        padding: 0;
+    }
+
+    .gallery-image {
+        width: 23%;
+    }
+
+    .insomnia-button-style {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .insomnia-container {
+        width: 92.5%;
+    }
+
+    .insomnia-poster {
+        width: 100%;
+    }
+
+    .insomnia-image {
+        aspect-ratio: 2 / 0.65;
+        object-fit: cover;
+    }
+
+    .insomnia-info {
+        width: 54%;
+    }
+
+    .insomnia-about {
+        width: 46%;
+    }
+
+    .insomnia-gallery {
+        width: 100%;
+        padding: 0;
+    }
+
+    .gallery-image {
+        width: 23%;
+    }
+
+    .insomnia-button-style {
+        width: 30%;
+    }
+}

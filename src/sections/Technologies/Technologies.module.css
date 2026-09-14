@@ -1,0 +1,39 @@
+.technologies { padding: var(--section-padding-block-compact) var(--content-padding); background: var(--color-background); }
+.inner { width: min(100%, var(--content-width)); margin: 0 auto; }
+.header { max-width: 760px; margin-bottom: clamp(52px, 6vw, 78px); }
+.eyebrow { margin-bottom: 16px; color: var(--color-accent); font-size: 13px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+.title { max-width: 100%; font-size: var(--font-section-title-compact); font-weight: 600; line-height: var(--font-section-title-compact-line-height); letter-spacing: -.045em; text-wrap: balance; overflow-wrap: anywhere; }
+.groups { border-top: 0; }
+.group { display: grid; grid-template-columns: minmax(150px, .35fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); padding: clamp(34px, 4vw, 48px) 0; }
+.groupTitle { font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+.list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(28px, 4vw, 56px); margin: 0; padding: 0; list-style: none; }
+.item { min-height: 48px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-primary) 7%, transparent); color: var(--color-text-secondary); font-size: clamp(17px, 1.7vw, 20px); font-weight: 500; letter-spacing: -.02em; transition: color var(--transition-fast), padding-left var(--transition-fast); }
+.item:hover { padding-left: 4px; color: var(--color-text-primary); }
+.icon, .symbol { width: 22px; height: 22px; flex: 0 0 22px; color: currentColor; }
+.icon { display: block; background: currentColor; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.symbol { display: block; fill: currentColor; }
+.symbol rect { fill: none; stroke: currentColor; stroke-width: 1.7; }
+.symbol text { fill: currentColor; stroke: none; font: 700 7px var(--font-system); }
+@media (max-width: 760px) { .group { grid-template-columns: 1fr; gap: 24px; } }
+@media (max-width: 560px) {
+    .header { margin-bottom: 44px; }
+    .list { grid-template-columns: 1fr; }
+    .item {
+        position: relative;
+        min-height: 46px;
+        padding-left: 6px;
+        border-bottom: 0;
+    }
+    .item::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 6px;
+        height: 1px;
+        background: color-mix(in srgb, var(--color-text-primary) 7%, transparent);
+        transition: left var(--transition-fast);
+    }
+    .item:hover { padding-left: 10px; }
+    .item:hover::after { left: 10px; }
+}

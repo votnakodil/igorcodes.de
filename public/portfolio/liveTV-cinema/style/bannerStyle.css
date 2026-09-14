@@ -1,0 +1,124 @@
+.background-color {
+    background-color: #1F1F1F;
+    background-size: cover;
+}
+
+.container-padding {
+    padding-left: 3.75%;
+    padding-right: 3.75%;
+}
+
+.banner-image {
+    background-image: url(../img/1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.btn-blue-gradient {
+    background-image: linear-gradient(to right, #0754D8, #4668F8, #6CABFB);
+}
+
+.btn-grey-gradient {
+    background-image: linear-gradient(to right, #030B20, #0A1027, #121B27);
+}
+
+.bold-font {
+    font-family: 'Golos';
+    font-weight: bold;
+}
+
+.medium-font {
+    font-family: 'Golos';
+    font-weight: 500;
+}
+
+.normal-font {
+    font-family: 'Golos';
+    font-weight: normal;
+}
+
+.headline-text-size {
+    font-size: 47px;
+}
+
+.normal-text-size {
+    font-size: 13px;
+}
+
+.small-text-size {
+    font-size: 11px;
+}
+
+.button-text-size {
+    font-size: 12px;
+}
+
+.grey-color {
+    color: #8B8B8B;
+}
+
+.div-custom-padding {
+    padding-bottom: 0.05rem;
+    padding-right: 0.15rem;
+}
+
+.banner-info-container-size {
+    width: 32%;
+    height: 40%;
+}
+
+.banner-info-margin {
+    margin-top: 14rem;
+    margin-left: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.banner-buttons-container {
+    width: 120%;
+    height: 12%;
+}
+
+.banner-button-custom-width {
+    width: 10%;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .banner-info-margin {
+        margin-top: 18rem;
+    }
+
+    .banner-info-container-size {
+        width: 85%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .banner-info-margin {
+        margin-top: 22rem;
+    }
+
+    .banner-info-container-size {
+        width: 80%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .banner-info-margin {
+        margin-top: 4rem;
+    }
+
+    .banner-info-container-size {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .banner-info-margin {
+        margin-top: 9rem;
+    }
+
+    .banner-info-container-size {
+        width: 40%;
+    }
+}

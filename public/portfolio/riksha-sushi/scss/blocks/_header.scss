@@ -1,0 +1,243 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+}
+
+.background-stripes {
+    position: absolute;
+    width: 81.56%;
+    height: 100%;
+    left: 9.22%;
+    background: repeating-linear-gradient(to right, #fafafa 0, #fafafa 79px, transparent 79px, transparent 104px);
+    z-index: -1;
+
+    @include breakpoint(sm) {
+        background: repeating-linear-gradient(to right, #fafafa 0, #fafafa 30px, transparent 30px, transparent 38px);
+    }
+}
+
+.header {
+    @include setupSection($background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(245, 245, 245, 0.7) 50%, rgba(245, 245, 245, 0.7) 100%));
+
+    @include breakpoint(sm, md) {
+        background: transparent;
+    }
+
+    &__body {
+        @include setupBody($flexDir: column);
+
+        @include breakpoint(lg, xl, 2xl) {
+            flex-direction: row;
+        }
+    }
+
+    &__logo {
+        margin: 8px 0;
+        max-width: 70px;
+        align-self: center;
+
+        @include breakpoint(lg, xl, 2xl) {
+            max-width: 134px;
+            align-self: flex-start;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        max-width: 1022px;
+        margin-left: 56px;
+
+        @include breakpoint(sm, md) {
+            margin: 0;
+        }
+    }
+
+    &__up {
+        display: flex;
+        height: 50%;
+        align-items: center;
+
+        @include breakpoint(sm, md) {
+            flex-direction: column;
+        }
+    }
+
+    &__low {
+        display: flex;
+        height: 50%;
+        align-items: center;
+        justify-content: space-between;
+
+        @include breakpoint(sm, md) {
+            flex-wrap: wrap;
+            justify-content: space-around;
+            border-radius: 10px;
+            background: rgba(245, 245, 245, 0.5);
+            padding: 10px 0;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+    max-width: 517px;
+    flex-grow: 1;
+    justify-content: space-between;
+
+    @include breakpoint(sm) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    @include breakpoint(md) {
+        width: 70%;
+    }
+
+    &__item {
+        @include fontConfig($regularFont, 14px, 400);
+    }
+}
+
+.link {
+    &:link,
+    &:visited {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-left: 87px;
+    max-width: 154px;
+    flex-grow: 1;
+
+    @include breakpoint(lg) {
+        margin-left: 10px;
+    }
+
+    @include breakpoint(sm, md) {
+        margin: 10px 0;
+        align-items: center;
+    }
+
+    &__phone {
+        display: flex;
+    }
+
+    &__icon {
+    }
+
+    &__number {
+        margin-left: 8px;
+        @include fontConfig($mediumFont, 16px, 500);
+    }
+
+    &__hours {
+        @include fontConfig($mediumFont, 12px, 500, #b7b7b7);
+    }
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    width: 134px;
+    height: 48px;
+    margin-left: 56px;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    justify-content: space-evenly;
+
+    @include breakpoint(sm, md) {
+        height: 32px;
+        width: 110px;
+        margin: 10px 0;
+    }
+
+    @include breakpoint(lg) {
+        margin-left: 10px;
+        width: 90px;
+    }
+
+    &__amount {
+        @include fontConfig($mediumFont, 14px, 500);
+        width: 45px;
+        text-align: center;
+
+        @include breakpoint(sm, md, lg) {
+            width: 25px;
+            margin-left: 4%;
+        }
+    }
+
+    &__devider {
+        height: 24px;
+        border-left: 1px solid white;
+        border-radius: 4px;
+    }
+
+    &__button {
+        @include makeTransparentButton(24px, 24px);
+        position: relative;
+    }
+
+    &__icon {
+    }
+
+    &__items {
+        position: absolute;
+        top: -3px;
+        right: -5px;
+    }
+}
+
+.profile {
+    &__button {
+        @include makeTransparentButton(48px, 48px);
+        background-color: #f5f5f5;
+        border-radius: 6px;
+        margin-left: 24px;
+
+        @include breakpoint(sm, md) {
+            width: 32px;
+            height: 32px;
+            margin: 10px 0;
+        }
+
+        @include breakpoint(lg) {
+            margin-left: 10px;
+        }
+    }
+
+    &__icon {
+    }
+}
+
+.food-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(sm) {
+        margin-top: 5%;
+        margin-right: 5%;
+    }
+
+    &__icon {
+        margin-bottom: 10px;
+    }
+
+    &__name {
+        @include fontConfig($mediumFont, 16px, 500);
+    }
+}

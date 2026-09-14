@@ -1,0 +1,120 @@
+#classic__nft-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 770px;
+	padding-top: 88px;
+	background-color: black;
+}
+
+.classic__horizontal-block {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 1128px;
+	padding-left: 51px;
+}
+
+.classic__headline-block {
+	width: 284px;
+	height: 185px;
+	display: block;
+	background-image: url("images/purpleCloud.png");
+	background-repeat: no-repeat;
+}
+
+#classic__star {
+	position: absolute;
+	top: 41px;
+	right: 80px;
+	z-index: 1;
+}
+
+.classic__headline-first {
+	font-family: "StoneSoupNFW01";
+	font-size: 48px;
+	line-height: 46px;
+	letter-spacing: 2.5px;
+	padding-left: 30px;
+	padding-top: 56px;
+}
+
+.classic__headline-second {
+	font-family: "StoneSoupNFW01";
+	font-size: 53px;
+	line-height: 65px;
+	letter-spacing: 2.5px;
+	padding-left: 48px;
+	margin-top: -3px;
+}
+
+.classic__text-block {
+	width: 750px;
+	padding-right: 99px;
+	padding-top: 21px;
+	padding-left: 8px;
+}
+
+.classic__text {
+	font-family: "TTLakesNeue";
+	font-size: 20px;
+	line-height: 28px;
+}
+
+.classic__horizontal__block-pictures {
+	display: flex;
+	justify-content: space-between;
+	height: 363px;
+	width: 1128px;
+	padding-top: 19px;
+}
+
+#green__pic {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 5px;
+	background-color: #24D489;
+	width: 370px;
+}
+
+#yellow__pic {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FFD326;
+	width: 370px;
+}
+
+#pink__pic {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FF2FB5;
+	width: 370px;
+}
+
+.classic__section-footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 127px;
+	padding-top: 25px;
+}
+
+#classic__section-button {
+	width: 369px;
+	height: 61px;
+	border: none;
+	background-color: #C2E978;
+	border-radius: 10px;
+	font-family: "TTLakesNeue";
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 21.42px;
+	letter-spacing: 2.5px;
+	padding-top: 2.5px;
+}

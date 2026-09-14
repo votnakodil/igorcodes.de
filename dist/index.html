@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-language="en" data-language-preference="auto">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+        <title>Igor Volkov — Developer</title>
+
+        <meta
+            name="description"
+            content="Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences."
+        />
+
+        <meta name="author" content="Igor Volkov" />
+        <meta name="robots" content="index, follow" />
+
+        <link rel="canonical" href="https://igorcodes.de/" />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+        <meta name="theme-color" content="#ffffff" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Igor Volkov" />
+        <meta property="og:title" content="Igor Volkov — Developer" />
+        <meta
+            property="og:description"
+            content="Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences."
+        />
+        <meta property="og:url" content="https://igorcodes.de/" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="ru_RU" />
+        <meta property="og:image" content="https://igorcodes.de/social-preview.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/webp" />
+        <meta property="og:image:alt" content="Igor Volkov — Developer" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Igor Volkov — Developer" />
+        <meta
+            name="twitter:description"
+            content="Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences."
+        />
+        <meta name="twitter:image" content="https://igorcodes.de/social-preview.webp" />
+        <meta name="twitter:image:alt" content="Igor Volkov — Developer" />
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Person",
+                        "@id": "https://igorcodes.de/#person",
+                        "name": "Igor Volkov",
+                        "alternateName": "Игорь Волков",
+                        "url": "https://igorcodes.de/",
+                        "sameAs": [
+                            "https://github.com/votnakodil",
+                            "https://www.linkedin.com/in/igorvo1kov"
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://igorcodes.de/#website",
+                        "url": "https://igorcodes.de/",
+                        "name": "Igor Volkov",
+                        "inLanguage": ["en", "ru"],
+                        "publisher": {
+                            "@id": "https://igorcodes.de/#person"
+                        }
+                    }
+                ]
+            }
+        </script>
+
+        <script>
+            (() => {
+                const storageKey = "language";
+                const validPreferences = new Set(["en", "ru", "auto"]);
+
+                let preference = "auto";
+
+                try {
+                    const storedPreference = localStorage.getItem(storageKey);
+
+                    if (validPreferences.has(storedPreference)) {
+                        preference = storedPreference;
+                    } else {
+                        const legacyPreference = localStorage.getItem("lang");
+                        const migratedPreference = legacyPreference === "autoLang" ? "auto" : legacyPreference;
+
+                        if (validPreferences.has(migratedPreference)) {
+                            preference = migratedPreference;
+                            localStorage.setItem(storageKey, preference);
+                        }
+                    }
+                } catch {
+                    // localStorage may be unavailable in restricted browser contexts.
+                }
+
+                const browserLanguages = navigator.languages?.length
+                    ? navigator.languages
+                    : [navigator.language];
+
+                const browserLanguage = browserLanguages[0]?.toLowerCase() ?? "en";
+                const detectedLanguage = browserLanguage.startsWith("ru") ? "ru" : "en";
+                const language = preference === "auto" ? detectedLanguage : preference;
+
+                document.documentElement.lang = language;
+                document.documentElement.dataset.language = language;
+                document.documentElement.dataset.languagePreference = preference;
+
+                const metadata = {
+                    en: {
+                        title: "Igor Volkov — Developer",
+                        description: "Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences.",
+                        locale: "en_US",
+                    },
+                    ru: {
+                        title: "Игорь Волков — Разработчик",
+                        description: "Личный сайт и портфолио Игоря Волкова — разработчика мобильных и веб-продуктов.",
+                        locale: "ru_RU",
+                    },
+                }[language];
+
+                document.title = metadata.title;
+
+                const setMetaContent = (selector, content) => {
+                    document.querySelector(selector)?.setAttribute("content", content);
+                };
+
+                setMetaContent('meta[name="description"]', metadata.description);
+                setMetaContent('meta[property="og:title"]', metadata.title);
+                setMetaContent('meta[property="og:description"]', metadata.description);
+                setMetaContent('meta[property="og:locale"]', metadata.locale);
+                setMetaContent('meta[name="twitter:title"]', metadata.title);
+                setMetaContent('meta[name="twitter:description"]', metadata.description);
+            })();
+        </script>
+
+        <script>
+            (() => {
+                const storedTheme = localStorage.getItem("theme");
+                const preference = storedTheme === "light" || storedTheme === "dark" || storedTheme === "system"
+                    ? storedTheme
+                    : "system";
+                const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light";
+                const resolvedTheme = preference === "system" ? systemTheme : preference;
+
+                document.documentElement.dataset.theme = resolvedTheme;
+                document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
+                document.documentElement.style.colorScheme = resolvedTheme;
+
+                const themeColor = document.querySelector('meta[name="theme-color"]');
+                if (themeColor) {
+                    themeColor.setAttribute("content", resolvedTheme === "dark" ? "#000000" : "#ffffff");
+                }
+            })();
+        </script>
+      <script type="module" crossorigin src="/assets/index-Cyv7hFtS.js"></script>
+      <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-CbXtAM7H.js">
+      <link rel="modulepreload" crossorigin href="/assets/react-vendor-BicOiEU0.js">
+      <link rel="modulepreload" crossorigin href="/assets/motion-vendor-ClluBRct.js">
+      <link rel="modulepreload" crossorigin href="/assets/liquid-gooey-CrzLTzZ1.js">
+      <link rel="modulepreload" crossorigin href="/assets/symbols-react-1uPTq8gl.js">
+      <link rel="stylesheet" crossorigin href="/assets/index-BRZCfbAs.css">
+    </head>
+
+    <body>
+        <div id="root"></div>
+    </body>
+</html>

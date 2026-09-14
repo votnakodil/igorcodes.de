@@ -1,0 +1,248 @@
+#airdrop__section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 1000px;
+	padding-top: 130px;
+	background-color: black;
+}
+
+.airdrop__text-block {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+	height: 108px;
+}
+
+#airdrop__lines {
+	position: absolute;
+	z-index: 1;
+	top: -20px;
+	right: -12px;
+}
+
+.airdrop__headline-text {
+	font-family: "StoneSoupNFW01";
+	font-size: 64px;
+	line-height: 46px;
+	letter-spacing: 2.5px;
+}
+
+.airdrop__text {
+	font-family: "TTLakesNeue";
+	font-size: 24px;
+	line-height: 28px;
+}
+
+.numbers__block {
+	display: flex;
+	justify-content: space-between;
+	width: 1128px;
+	height: 257px;
+}
+
+.number__underlines {
+	width: 711px;
+	position: absolute;
+	top: 76px;
+	left: 215px;
+	z-index: 1;
+}
+
+#underlineOne {
+	width: 114px;
+	margin-right: 177px;
+}
+
+#underlineTwo {
+	width: 98px;
+	margin-right: 200px;
+}
+
+#underlineThree {
+	width: 109px;
+}
+
+.number__square {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 267px;
+	height: 269px;
+	background-color: black;
+	padding-top: 18px;
+}
+
+.ellipse-block {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-repeat: no-repeat;
+}
+
+#green__ellipse {
+	margin-top: -1px;
+	width: 133px;
+	height: 130px;
+	background-image: url("images/greenEllipse.png");
+}
+
+#green__number {
+	font-family: "TTLakesNeue";
+	font-size: 48px;
+	line-height: 28px;
+	color: #00DB2C;
+}
+
+.green__title {
+	padding-bottom: 16px;
+	font-family: "StoneSoupNFW01";
+	font-size: 24px;
+	line-height: 29.4px;
+}
+
+#yellow__ellipse {
+	margin-top: -3px;
+	width: 152px;
+	height: 150px;
+	background-image: url("images/yellowEllipse.png");
+}
+
+#yellow__number {
+	font-family: "TTLakesNeue";
+	font-size: 56px;
+	line-height: 37px;
+	color: #FFA929;
+}
+
+.yellow__title {
+	padding-bottom: 26px;
+	font-family: "StoneSoupNFW01";
+	font-size: 32px;
+	line-height: 38px;
+	padding-top: 8px;
+}
+
+#pink__ellipse {
+	margin-top: -5px;
+	width: 173px;
+	height: 172px;
+	background-image: url("images/pinkEllipse.png");
+}
+
+#pink__number {
+	font-family: "TTLakesNeue";
+	font-size: 96px;
+	line-height: 37px;
+	color: #D51287;
+}
+
+.pink__title {
+	padding-bottom: 18px;
+	font-family: "StoneSoupNFW01";
+	font-size: 40px;
+	line-height: 48px;
+}
+
+#white__ellipse {
+	margin-top: 10px;
+	width: 105px;
+	height: 102px;
+	background-image: url("images/whiteEllipse.png");
+}
+
+#white__number {
+	font-family: "TTLakesNeue";
+	font-size: 32px;
+	line-height: 22px;
+	color: white;
+}
+
+.white__title {
+	padding-bottom: 10px;
+	font-family: "StoneSoupNFW01";
+	font-size: 24px;
+	line-height: 29px;
+}
+
+.tokenomics__block {
+	width: 1128px;
+	height: 402px;
+	background: linear-gradient(to bottom, #131624, #191D2E);
+	display: flex;
+	justify-content: space-between;
+	padding-top: 65px;
+	padding-right: 121px;
+	margin-top: 29px;
+}
+
+#tokenomics__star {
+	position: absolute;
+	z-index: 1;
+	top: 57px;
+	left: 56px;
+}
+
+.tokenomics__headline {
+	padding-left: 76px;
+	font-family: "StoneSoupNFW01";
+	font-size: 48px;
+	line-height: 46px;
+}
+
+.tokenomics__info-block {
+	width: 780px;
+	height: 280px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-left: 33px;
+}
+
+.upper__text {
+	font-family: "TTLakesNeue";
+	font-size: 20px;
+	line-height: 28px;	
+	padding-right: 20px;
+}
+
+.tokenomics__vertical-list {
+	height: 106px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.tokenomics__list-item {
+	height: 24px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.list__number-text {
+	font-family: "TTLakesNeue";
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 22px;
+	padding-top: 3px;
+}
+
+.list__main-text {
+	padding-top: 2px;
+	padding-left: 12px;
+	font-family: "TTLakesNeue";
+	font-size: 20px;
+	line-height: 24px;
+}
+
+.lower__text {
+	padding-right: 20px;
+	font-family: "TTLakesNeue";
+	font-size: 18px;
+	line-height: 28px;	
+}

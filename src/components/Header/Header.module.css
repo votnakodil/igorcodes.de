@@ -1,0 +1,498 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid transparent;
+    background: color-mix(in srgb, var(--color-background) 80%, transparent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: border-color 180ms ease;
+}
+
+.header[data-scrolled] {
+    border-bottom-color: color-mix(in srgb, var(--color-border) 48%, transparent);
+    backdrop-filter: blur(4.5px) saturate(110%) contrast(80%) brightness(105%);
+    -webkit-backdrop-filter: blur(4.5px) saturate(110%) contrast(80%) brightness(105%);
+}
+
+:global([data-theme="dark"]) .header[data-scrolled] {
+    backdrop-filter: blur(4.5px) saturate(82%) contrast(68%) brightness(68%);
+    -webkit-backdrop-filter: blur(4.5px) saturate(82%) contrast(68%) brightness(68%);
+}
+
+.inner {
+    width: min(calc(100% - (var(--content-padding) * 2)), var(--content-width));
+    height: 52px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.brand {
+    flex-shrink: 0;
+    min-width: 62px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--color-accent);
+    transition: color 180ms ease;
+}
+
+.brand:hover {
+    color: var(--color-button-hover);
+}
+
+.brand:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+.brandLaurel {
+    display: block;
+    width: 10px;
+    height: 22px;
+    flex: 0 0 10px;
+}
+
+.brandInitials {
+    min-width: 26px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.055em;
+    text-align: center;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+}
+
+.navigation a {
+    transition: color 180ms ease;
+}
+
+.navigation a:hover {
+    color: var(--color-text-primary);
+}
+
+.mobileMenu {
+    position: relative;
+    display: none;
+    flex: 0 0 31px;
+    width: 31px;
+    height: 31px;
+    isolation: isolate;
+}
+
+.menuGoo {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    width: 260px;
+    height: 248px;
+    z-index: 2100;
+    overflow: visible !important;
+    pointer-events: none;
+}
+
+.menuButtonItem {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 31px;
+    height: 31px;
+    z-index: 2201;
+    pointer-events: auto;
+}
+
+.menuButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 31px;
+    height: 31px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: #ffffff;
+    background: var(--color-button);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.menuButton:hover {
+    background: var(--color-button-hover);
+}
+
+.menuIcon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    color: #ffffff;
+}
+
+.menuGlyph {
+    position: absolute;
+    inset: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuGlyph svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    color: inherit;
+}
+
+.closeGlyph svg {
+    width: 14px;
+    height: 14px;
+}
+
+.menuPanel {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    z-index: 2;
+    width: 224px;
+    height: 210px;
+    overflow: hidden;
+    border-radius: 24px;
+    color: #ffffff;
+    background: transparent;
+    pointer-events: auto;
+    transform-origin: calc(100% - 15px) -17px;
+}
+
+.menuContent {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+    padding: 15px;
+}
+
+.menuContent a {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    padding: 0 13px;
+    border-radius: 14px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 550;
+    transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.menuContent a:hover {
+    background: rgba(255, 255, 255, .16);
+    transform: translateX(2px);
+}
+
+.settings {
+    --settings-button-width: 94px;
+    position: relative;
+    flex: 0 0 var(--settings-button-width);
+    width: var(--settings-button-width);
+    height: 31px;
+    isolation: isolate;
+    margin-right: 5px;
+}
+
+.settings[data-language="ru"] { --settings-button-width: 108px; }
+
+.settingsGoo {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    width: 391px;
+    height: 238px;
+    z-index: 2100;
+    overflow: visible !important;
+    pointer-events: none;
+}
+
+.settingsButtonItem {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--settings-button-width);
+    height: 31px;
+    z-index: 2201;
+    pointer-events: auto;
+}
+
+.settingsButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    width: var(--settings-button-width);
+    height: 31px;
+    min-height: 31px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 9px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    color: #ffffff;
+    background: var(--color-button);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2203;
+    pointer-events: auto;
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.settingsButton:hover {
+    background: var(--color-button-hover);
+}
+
+.settingsIconSlot {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+}
+
+.settingsIconOverlay {
+    position: absolute;
+    top: 8px;
+    left: 9px;
+    z-index: 2305;
+    width: 15px;
+    height: 15px;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    pointer-events: none;
+}
+
+.settingsIconRotor {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    transform-origin: 50% 50%;
+    transition: transform 520ms cubic-bezier(.2,.8,.2,1);
+}
+
+.settingsIcon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+}
+
+.settingsIconOverlayOpen .settingsIconRotor { transform: rotate(360deg); }
+
+.settingsPanel {
+    position: absolute;
+    top: 64px;
+    right: calc((var(--settings-button-width) - 292px) / 2);
+    z-index: 2;
+    pointer-events: auto;
+    width: 292px;
+    max-width: calc(100vw - 28px);
+    height: 200px;
+    transform-origin: 50% -17px;
+    color: #ffffff;
+    overflow: hidden;
+    border-radius: 24px;
+    background: transparent;
+}
+
+.popoverContent {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 18px;
+}
+
+.popoverTitle {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.018em;
+}
+
+.settingRow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settingLabel {
+    color: rgba(255,255,255,.72);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .settingsPanel,
+    .menuPanel {
+        transform: none !important;
+    }
+    .settingsIconRotor,
+    .menuGlyph { transition: none; }
+}
+
+.popoverContent :global([role="radiogroup"]) { border-color: rgba(255,255,255,.16); background: rgba(0,0,0,.12); box-shadow: inset 0 1px 1px rgba(0,0,0,.12); }
+.popoverContent :global([role="radio"]) { color: #ffffff; }
+.popoverContent :global([role="radio"] > span:first-child:not(:last-child)) { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.22); box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+
+@media (max-width: 1023px) {
+    .inner {
+        height: 60px;
+    }
+
+    .mobileMenu,
+    .menuButtonItem,
+    .menuButton {
+        width: 40px;
+        height: 40px;
+    }
+
+    .mobileMenu {
+        flex-basis: 40px;
+    }
+
+    .settings,
+    .settingsButtonItem,
+    .settingsButton {
+        height: 40px;
+    }
+
+    .settingsButton {
+        min-height: 40px;
+        padding-inline: 12px;
+    }
+
+    .settingsIconOverlay {
+        top: 12px;
+        left: 12px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .right {
+        width: auto;
+    }
+
+    .settingsGoo {
+        top: 0;
+    }
+
+}
+
+@media (max-width: 1397px) {
+    .settingsPanel {
+        right: 0;
+    }
+}
+
+@media (max-width: 639px) {
+    .right {
+        gap: 9px;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .mobileMenu {
+        display: block;
+    }
+}
+
+@media (max-width: 420px) {
+    .right {
+        gap: 8px;
+    }
+
+    .settings {
+        flex-basis: 40px;
+        width: 40px;
+        margin-right: 0;
+    }
+
+    .settingsGoo {
+        width: min(292px, calc(100vw - 28px));
+        right: 0;
+    }
+
+    .settingsPanel {
+        right: 0;
+        width: 100%;
+        max-width: none;
+    }
+
+    .settingsButton {
+        width: 40px;
+        min-height: 40px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .settingsButtonItem {
+        right: 0;
+        width: 40px;
+        height: 40px;
+    }
+
+    .settingsLabel {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .settingsIconSlot {
+        width: 20px;
+        height: 20px;
+    }
+
+    .settingsIconOverlay {
+        top: 10px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+    }
+
+}
+
+.settingRow + .settingRow {
+    margin-top: 16px;
+}

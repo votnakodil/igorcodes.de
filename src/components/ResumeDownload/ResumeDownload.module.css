@@ -1,0 +1,337 @@
+.downloadControl {
+    position: relative;
+    z-index: 901;
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    isolation: isolate;
+}
+
+.downloadControl[data-panel-side="below"] {
+    z-index: 899;
+}
+
+.resumeGoo {
+    position: absolute !important;
+    z-index: 900;
+    width: 100vw;
+    height: 100dvh;
+    overflow: visible !important;
+    pointer-events: none;
+}
+
+.buttonShape {
+    position: absolute;
+    display: block;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    pointer-events: none;
+}
+
+.downloadButton {
+    position: relative;
+    z-index: 1;
+    width: auto;
+    height: 48px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 22px;
+    overflow: hidden;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--color-button);
+    color: #fff;
+    font: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.downloadMain {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.downloadLabel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.downloadArrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.downloadDetails {
+    position: absolute;
+    right: 30px;
+    bottom: 8px;
+    left: 0;
+    color: rgba(255, 255, 255, .9);
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: .01em;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.downloadButton:hover {
+    background: var(--color-button-hover);
+}
+
+.panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: auto;
+    overflow: hidden;
+    border-radius: 26px;
+    color: #fff;
+    background: transparent;
+}
+
+.panel:not([data-open]) {
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: clamp(24px, 4vw, 36px);
+    border-radius: 26px;
+    background: transparent;
+}
+
+.close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(0,0,0,.18);
+    display: grid;
+    place-items: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+.close svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.eyebrow {
+    margin-bottom: 10px;
+    color: rgba(255,255,255,.72);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.content h2 {
+    max-width: 85%;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.08;
+    letter-spacing: -.035em;
+}
+
+.description {
+    margin-top: 14px;
+    color: rgba(255,255,255,.76);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.canvas {
+    width: 100%;
+    height: 128px;
+    display: block;
+    margin-top: 24px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 18px;
+}
+
+.refresh {
+    margin: 8px 0 0 auto;
+    display: block;
+    border: 0;
+    color: #fff;
+    background: transparent;
+    font: 500 13px var(--font-system);
+    cursor: pointer;
+}
+
+.content form {
+    margin-top: 22px;
+}
+
+.content label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(255,255,255,.72);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.content input {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    border: 1px solid rgba(255,255,255,.24);
+    border-radius: 14px;
+    color: #fff;
+    background: rgba(0,0,0,.16);
+    font: 600 18px var(--font-system);
+    letter-spacing: .12em;
+    outline: none;
+}
+
+.content input::placeholder {
+    color: rgba(255,255,255,.58);
+}
+
+.content input:focus {
+    border-color: rgba(255,255,255,.75);
+    box-shadow: 0 0 0 4px rgba(255,255,255,.14);
+}
+
+.error {
+    margin-top: 8px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.actions {
+    margin-top: 48px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.actions button {
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    font: 500 14px var(--font-system);
+    cursor: pointer;
+}
+
+.cancel {
+    color: #fff;
+    background: rgba(0,0,0,.16);
+}
+
+.submit {
+    color: var(--color-button);
+    background: #fff;
+}
+
+@media (max-width: 520px) {
+    .downloadDetails {
+        right: 30px;
+        left: 0;
+        font-size: 9.5px;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .close {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .eyebrow {
+        margin-bottom: 6px;
+        font-size: 10px;
+    }
+
+    .content h2 {
+        max-width: 88%;
+        font-size: 26px;
+    }
+
+    .description {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.35;
+    }
+
+    .canvas {
+        height: 88px;
+        margin-top: 14px;
+        border-radius: 14px;
+    }
+
+    .refresh {
+        margin-top: 6px;
+        font-size: 11px;
+    }
+
+    .content form {
+        margin-top: 12px;
+    }
+
+    .content label {
+        margin-bottom: 6px;
+        font-size: 12px;
+    }
+
+    .content input {
+        height: 44px;
+        border-radius: 12px;
+        font-size: 16px;
+    }
+
+    .actions {
+        margin-top: 18px;
+        gap: 8px;
+    }
+
+    .actions button {
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 40px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .downloadButton {
+        transition: none;
+    }
+}

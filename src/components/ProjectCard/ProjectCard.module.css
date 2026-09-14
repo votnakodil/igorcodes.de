@@ -1,0 +1,87 @@
+.card { display: flex; flex-direction: column; height: 744px; overflow: hidden; background: var(--color-background); border-radius: 32px; }
+.visual { flex: 1; min-height: 0; overflow: hidden; background: var(--color-background); }
+.image { width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 28px 64px 0; user-select: none; -webkit-user-drag: none; }
+.webMockupMotion { width: 100%; height: 100%; }
+.webMockup { object-fit: contain; object-position: center bottom; padding: 0 10px; transform: scale(1.55); transform-origin: center bottom; }
+.customNumpadVisual { position: relative; }
+.customNumpadImage { position: absolute; left: 50%; bottom: -2%; width: auto; max-width: none; height: 168%; padding: 0; object-fit: contain; object-position: center bottom; transform: translateX(-50%); }
+.showcaseVisual { position: relative; isolation: isolate; }
+.showcase { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.showcaseCenterPosition,
+.showcaseSide { position: absolute; display: block; width: auto; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.showcaseCenterPosition { z-index: 2; top: 50%; left: 50%; height: 58%; max-width: 26%; aspect-ratio: 1; transform: translate(-50%, -50%); }
+.showcaseCenterBadge { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 24%; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; transform: perspective(720px) rotateX(0deg) rotateY(0deg) scale(1); transform-style: preserve-3d; transition: transform 520ms cubic-bezier(.2, .9, .25, 1.25), filter 180ms ease; will-change: transform; }
+.showcaseCenterBadge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(108deg, transparent 28%, rgb(255 255 255 / 14%) 39%, rgb(255 255 255 / 84%) 50%, rgb(255 255 255 / 14%) 61%, transparent 72%) 150% 50% / 260% 100% no-repeat; opacity: 0; mix-blend-mode: screen; }
+.showcaseCenterBadge:hover::after { animation: badgeSheen 2.1s cubic-bezier(.45, 0, .55, 1) 1 both; }
+.showcaseCenterBadge[data-dragging="true"] { cursor: grabbing; transition: none; filter: brightness(1.04) saturate(1.05); }
+.showcaseCenter { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; -webkit-user-drag: none; transform: scale(1.09); }
+.showcaseSide { z-index: 1; top: 31%; height: 142%; }
+.showcaseLeft { top: -56%; left: 7%; }
+.showcaseRight { top: 20%; right: 1.5%; height: 176%; }
+.splitShowcase { isolation: isolate; }
+.splitBadgePosition { left: 77%; height: 64%; max-width: 21%; }
+.splitBadge .showcaseCenter { transform: scale(1.01); }
+.splitBadge::after {
+    inset: 2.5%;
+    border-radius: 23%;
+    -webkit-mask: url("../../assets/images/projects/flc-calculator/flc-calculator-app-icon.webp") center / contain no-repeat;
+    mask: url("../../assets/images/projects/flc-calculator/flc-calculator-app-icon.webp") center / contain no-repeat;
+}
+.splitPhones { position: absolute; z-index: 1; top: 2%; left: 1.5%; display: block; width: 57%; height: 132%; object-fit: contain; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
+.content { flex-shrink: 0; padding: 28px 64px 48px; text-align: center; }
+.title { font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: -.035em; overflow-wrap: anywhere; }
+.description { max-width: 900px; margin: 12px auto 0; color: var(--color-text-secondary); font-size: 18px; line-height: 1.5; }
+.footer { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 20px; }
+.rating { display: inline-flex; align-items: center; gap: 6px; min-height: 20px; color: var(--color-text-secondary); letter-spacing: -.016em; }
+.rating strong { font-size: 16px; line-height: 1; }
+.ratingSeparator { font-size: 12px; font-weight: 700; line-height: 1; }
+.ratingCount { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; font-size: 10px; font-weight: 500; line-height: 1; text-align: left; }
+.ratingCount span { font-size: 8px; }
+.technologies { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.technologies li { max-width: 100%; overflow-wrap: anywhere; padding: 5px 10px; border-radius: var(--radius-pill); background: var(--color-control); color: var(--color-text-secondary); font-size: 12px; line-height: 1.3; }
+.links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; }
+.links a { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; color: var(--color-accent); font-size: 16px; font-weight: 500; }
+.links a { position: relative; text-decoration: none; }
+.links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 4px; }
+.appStoreIcon { display: inline-block; flex: 0 0 18px; width: 18px; height: 18px; background: currentColor; -webkit-mask: url("../../assets/icons/brand-app-store.svg") center / contain no-repeat; mask: url("../../assets/icons/brand-app-store.svg") center / contain no-repeat; }
+.vcIcon {
+    display: inline-block;
+    flex: 0 0 19px;
+    width: 19px;
+    height: 19px;
+    background: currentColor;
+    -webkit-mask: url("../../assets/icons/brand-vc-ru.svg") center / contain no-repeat;
+    mask: url("../../assets/icons/brand-vc-ru.svg") center / contain no-repeat;
+}
+@media (max-width: 999px) { .content { padding: 24px 36px 36px; } .title { font-size: 32px; } .description { font-size: 16px; } }
+@media (max-width: 639px) {
+    .card { height: 600px; border-radius: 28px; }
+    .image { padding: 24px 20px 0; }
+    .webMockup { object-position: center; padding: 12px 14px 0; transform: none; }
+    .customNumpadImage { height: 150%; padding: 0; }
+    .showcaseSide { display: none; }
+    .splitPhones { display: none; }
+    .showcaseCenterPosition { width: min(62%, 238px); height: auto; max-width: none; max-height: 72%; }
+    .splitBadgePosition { left: 50%; }
+    .showcaseCenterBadge { cursor: default; pointer-events: none; touch-action: auto; }
+    .content { padding: 24px 22px 32px; }
+    .title { font-size: 27px; }
+    .description { font-size: 15px; line-height: 1.5; }
+    .footer { margin-top: 16px; gap: 10px; }
+    .technologies li { font-size: 11px; }
+    .links a { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .showcaseCenterBadge { transition: none; }
+    .showcaseCenterBadge::after { animation: none; }
+}
+
+@keyframes badgeSheen {
+    0% { opacity: 0; background-position: 150% 50%; }
+    14% { opacity: .95; }
+    82% { opacity: .86; background-position: -150% 50%; }
+    100% { opacity: 0; background-position: -150% 50%; }
+}
+
+.description { max-width: 68ch; text-wrap: pretty; }

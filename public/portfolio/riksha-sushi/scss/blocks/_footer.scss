@@ -1,0 +1,147 @@
+.footer {
+    @include setupSection($marginT: 50px, $background: linear-gradient(to bottom, transparent 0%, transparent 7%, black 7%));
+
+    @include breakpoint(xl, 2xl) {
+        margin-top: 143px;
+        max-height: 183px;
+        background: linear-gradient(to bottom, transparent 0%, transparent 21.57%, black 21.57%);
+    }
+
+    &__body {
+        @include setupBody;
+    }
+
+    &__background-stripes {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background: repeating-linear-gradient(to right, rgba(250, 250, 250, 0.09) 0, rgba(250, 250, 250, 0.09) 79px, transparent 79px, transparent 104px);
+
+        @include breakpoint(md, sm) {
+            justify-content: center;
+            gap: 5px 30px;
+        }
+
+        @include breakpoint(sm) {
+            background: repeating-linear-gradient(to right, rgba(250, 250, 250, 0.09) 0, rgba(250, 250, 250, 0.09) 30px, transparent 30px, transparent 38px);
+        }
+    }
+
+    &__logo {
+        width: 100%;
+        max-width: 112px;
+        height: 132px;
+        margin-bottom: 51px;
+
+        @include breakpoint(sm, md, lg) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &__contacts-left {
+        display: flex;
+        flex-direction: column;
+        gap: 12px 0;
+        margin-top: 20px;
+        max-width: 294px;
+
+        @include breakpoint(md, lg, sm) {
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    &__icons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 96px;
+    }
+
+    &__icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    &__links-container {
+        margin: 20px 15px 0 15px;
+        width: 100%;
+        max-width: 396px;
+
+        @include breakpoint(md, lg, sm) {
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    &__contacts-right {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        color: white;
+        margin-top: 50px;
+
+        @include breakpoint(sm, md, lg) {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        @include breakpoint(lg, md, sm) {
+            width: 100%;
+            align-self: flex-end;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+
+    &__title {
+        @include fontConfig($mediumFont, 24px, 700, white);
+
+        @include breakpoint(sm) {
+            font-size: 15px;
+        }
+    }
+
+    &__subtitle {
+        @include fontConfig($regularFont, 16px, 400, white);
+        margin-top: 7px;
+
+        @include breakpoint(sm) {
+            font-size: 12px;
+        }
+    }
+
+    &__remark {
+        @include fontConfig($regularFont, 12px, 300, white);
+        margin-top: 20px;
+
+        @include breakpoint(sm) {
+            font-size: 10px;
+            margin-top: 10px;
+        }
+    }
+}
+.links {
+    display: flex;
+    list-style: none;
+    gap: 20px 40px;
+    flex-wrap: wrap;
+
+    @include breakpoint(sm) {
+        gap: 10px 40px;
+    }
+
+    &__item {
+        @include fontConfig($regularFont, 14px, 400);
+        flex-grow: 1;
+    }
+}
+.link--white {
+    &:link,
+    &:visited {
+        color: white;
+        text-decoration: none;
+    }
+}

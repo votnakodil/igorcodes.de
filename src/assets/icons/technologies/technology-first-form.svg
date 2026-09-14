@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 593 630" fill="none">
+  <defs>
+    <mask id="first-form-mark" maskUnits="userSpaceOnUse" x="70" y="38" width="516" height="554" style="mask-type:luminance">
+      <path fill="#fff" d="M130 51c10-2 20 0 29 5l397 227c12 7 20 19 21 33 1 14-6 27-18 34L151 581c-11 6-23 9-35 6-20-4-35-22-35-43V105c0-26 18-48 43-53l6-1Z"/>
+      <path d="m109 63 129 224M238 344 108 574M303 316h267" stroke="#000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <rect x="70" y="38" width="516" height="554" fill="currentColor" mask="url(#first-form-mark)"/>
+</svg>

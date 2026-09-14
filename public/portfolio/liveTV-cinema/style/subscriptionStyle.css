@@ -1,0 +1,92 @@
+.black-background {
+    background-color: #141414;
+    background-size: cover;
+}
+
+.subscribe-container {
+    padding-bottom: 3rem;
+}
+
+.subscribe-headline {
+    width: 48%;
+}
+
+.subscription-input {
+    border: 1px solid #4F4F4F;
+    border-radius: 5px;
+    background: #141414;
+    width: 100%;
+    aspect-ratio: 2 / 0.2;
+}
+
+input[type="radio"] {
+    border: 1px solid white;
+    background-color: #141414;
+    padding: 2px;
+    background-clip: content-box;
+}
+
+input[type="radio"]:checked {
+    background-color: white;
+    border: 1px solid white;
+}
+
+.form-check-input[type=checkbox],
+input[type="checkbox"]:checked {
+    border: 1px solid white;
+    background-color: #141414;
+    background-clip: content-box;
+    border-radius: 0px;
+}
+
+.subscription-button {
+    width: 42%;
+    aspect-ratio: 2 / 0.45;
+    margin-top: 2.5rem;
+}
+
+.price-container {
+    background-image: linear-gradient(to right, #121D32, #1C2137, #212A37);
+    border-radius: 8px;
+}
+
+.price-container-margin {
+    margin-top: 1.9rem;
+}
+
+.price-text {
+    font-size: 30px;
+    color: #6CB1FC !important;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .subscribe-headline {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .subscribe-headline {
+        width: 100%;
+    }
+
+    .subscription-button {
+        width: 65%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .subscribe-headline {
+        width: 66%;
+    }
+
+    .subscription-button {
+        width: 55%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .subscribe-headline {
+        width: 57%;
+    }
+}
