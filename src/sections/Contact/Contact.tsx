@@ -1,6 +1,7 @@
 import { BrandIcon } from "@/components/Icons/BrandIcon";
 import { ArrowIcon } from "@/components/Icons/ArrowIcon";
 import { useTranslation } from "@/features/language/useTranslation";
+import { trackGoal } from "@/features/analytics/yandexMetrika";
 import { motion, useReducedMotion } from "motion/react";
 
 import { revealSpring, revealSpringSoft, revealViewport } from "@/motion/transitions";
@@ -52,7 +53,7 @@ export function Contact() {
                     viewport={revealViewport}
                     transition={{ ...revealSpringSoft, delay: 0.18 }}
                 >
-                    <a className={styles.action} href="mailto:hello@igorcodes.de">
+                    <a className={styles.action} href="mailto:hello@igorcodes.de" onClick={() => trackGoal("contact_email")}>
                         {t("email")}
                         <ArrowIcon />
                     </a>
@@ -69,6 +70,7 @@ export function Contact() {
                         href="https://github.com/votnakodil"
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => trackGoal("contact_github")}
                         initial={reduceMotion ? false : { opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={revealViewport}
@@ -82,6 +84,7 @@ export function Contact() {
                         href="https://www.linkedin.com/in/igorvo1kov"
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => trackGoal("contact_linkedin")}
                         initial={reduceMotion ? false : { opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={revealViewport}
@@ -95,6 +98,7 @@ export function Contact() {
                         href="https://t.me/tochnoetoon"
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => trackGoal("contact_telegram")}
                         initial={reduceMotion ? false : { opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={revealViewport}

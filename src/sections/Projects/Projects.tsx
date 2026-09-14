@@ -3,6 +3,7 @@ import { BrandIcon } from "@/components/Icons/BrandIcon";
 import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslation } from "@/features/language/useTranslation";
+import { trackGoal } from "@/features/analytics/yandexMetrika";
 import { ProjectGallery } from "./ProjectGallery";
 import { projects } from "@/content/projects";
 import { revealSpring, revealViewport } from "@/motion/transitions";
@@ -16,6 +17,10 @@ export function Projects() {
     const reduceMotion = useReducedMotion();
     const [category, setCategory] = useState<ProjectCategory>("swift");
     const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+    const selectCategory = (value: ProjectCategory) => {
+        trackGoal(value === "swift" ? "project_tab_swift" : "project_tab_web");
+        setCategory(value);
+    };
 
     return (
         <section className={styles.projects} id="projects" aria-labelledby="projects-title">
@@ -32,7 +37,7 @@ export function Projects() {
                             type="button" role="tab" id={`projects-tab-${value}`}
                             aria-selected={category === value} aria-controls={`projects-panel-${value}`}
                             tabIndex={category === value ? 0 : -1}
-                            onClick={() => setCategory(value)}
+                            onClick={() => selectCategory(value)}
                             onKeyDown={event => {
                                 let next: number;
                                 if (event.key === "ArrowRight" || event.key === "ArrowLeft") next = 1 - index;
@@ -40,7 +45,7 @@ export function Projects() {
                                 else if (event.key === "End") next = 1;
                                 else return;
                                 event.preventDefault();
-                                setCategory(categories[next]);
+                                selectCategory(categories[next]);
                                 tabs.current[next]?.focus();
                             }}>
                             {category === value && <motion.span className={styles.selection} layoutId="project-category"

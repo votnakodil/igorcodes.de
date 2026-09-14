@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "mo
 import { BrandIcon } from "@/components/Icons/BrandIcon";
 import { ArrowIcon } from "@/components/Icons/ArrowIcon";
 import { ShimmerText } from "@/components/ShimmerText/ShimmerText";
+import { getProjectOpenGoal, trackGoal } from "@/features/analytics/yandexMetrika";
 import { useTranslation } from "@/features/language/useTranslation";
 import type { Project, ProjectLink } from "@/types/project";
 import styles from "./ProjectCard.module.css";
@@ -153,7 +154,11 @@ export function ProjectCard({ project }: { project: Project }) {
                         {project.links.map(link => {
                             const label = link.label === "GitHub" ? link.label : t(link.label);
                             return (
-                                <a key={`${link.kind}-${link.url}`} href={link.url} target="_blank" rel="noreferrer" aria-label={`${label} — ${title}`}>
+                                <a key={`${link.kind}-${link.url}`} href={link.url} target="_blank" rel="noreferrer" aria-label={`${label} — ${title}`}
+                                    onClick={() => {
+                                        const goal = getProjectOpenGoal(project.id);
+                                        if (goal) trackGoal(goal);
+                                    }}>
                                     <ProjectLinkIcon kind={link.kind} />
                                     {link.kind === "article" ? <ShimmerText cadence="relaxed">{label}</ShimmerText> : label}
                                     <ArrowIcon />

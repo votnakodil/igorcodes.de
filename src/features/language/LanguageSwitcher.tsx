@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { trackGoal } from "@/features/analytics/yandexMetrika";
 
 import { useLanguage } from "./useLanguage";
 import { useTranslation } from "./useTranslation";
@@ -29,7 +30,10 @@ export function LanguageSwitcher() {
                         role="radio"
                         aria-checked={selected}
                         className={styles.option}
-                        onClick={() => setPreference(option.value)}
+                        onClick={() => {
+                            trackGoal(`language_${option.value}`);
+                            setPreference(option.value);
+                        }}
                     >
                         {selected && (
                             <motion.span

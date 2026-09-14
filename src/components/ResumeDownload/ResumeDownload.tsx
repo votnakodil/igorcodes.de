@@ -6,6 +6,7 @@ import { Liquid } from "liquid-gooey";
 
 import { ArrowIcon } from "@/components/Icons/ArrowIcon";
 import { useTranslation } from "@/features/language/useTranslation";
+import { trackGoal } from "@/features/analytics/yandexMetrika";
 import {
     liquidPopoverContentExit,
     liquidPopoverContentTransition,
@@ -188,6 +189,7 @@ export function ResumeDownload() {
     }, [code, open]);
 
     const show = () => {
+        trackGoal("resume_download_open");
         refresh();
         updateGeometry();
         setPanelMounted(true);
@@ -203,10 +205,12 @@ export function ResumeDownload() {
             return;
         }
 
+        trackGoal("resume_captcha_success");
         const link = document.createElement("a");
         link.href = "/docs/CV.pdf";
         link.download = "Igor-Volkov-CV.pdf";
         document.body.appendChild(link);
+        trackGoal("resume_download");
         link.click();
         link.remove();
         setOpen(false);

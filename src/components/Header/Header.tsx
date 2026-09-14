@@ -6,6 +6,7 @@ import { Liquid } from "liquid-gooey";
 import { IconGear, IconLaurelLeading, IconLaurelTrailing, IconLine3Horizontal, IconXmark } from "symbols-react";
 
 import { ThemeSwitcher } from "@/features/theme/ThemeSwitcher/ThemeSwitcher";
+import { trackGoal } from "@/features/analytics/yandexMetrika";
 import {
     liquidPopoverContentExit,
     liquidPopoverContentTransition,
@@ -145,7 +146,9 @@ export function Header() {
                                 morph={{ advanced: { blobInset: 4 } }}>
                                 <button type="button" aria-expanded={settingsOpen} className={styles.settingsButton}
                                     onClick={() => {
-                                        setActivePopover(current => nextHeaderPopover(current, "settings"));
+                                        const nextPopover = nextHeaderPopover(activePopover, "settings");
+                                        if (nextPopover === "settings") trackGoal("settings_open");
+                                        setActivePopover(nextPopover);
                                     }}>
                                     <span className={styles.settingsIconSlot} aria-hidden="true" />
                                     <span className={styles.settingsLabel}>{t("settings")}</span>

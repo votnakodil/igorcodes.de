@@ -2,6 +2,7 @@ import { useTranslation } from "@/features/language/useTranslation";
 import { motion } from "motion/react";
 
 import { useTheme } from "@/features/theme/useTheme";
+import { trackGoal } from "@/features/analytics/yandexMetrika";
 import type { ThemePreference } from "@/features/theme/theme.types";
 import { springs } from "@/motion/transitions";
 
@@ -29,7 +30,10 @@ export function ThemeSwitcher() {
                         role="radio"
                         aria-checked={selected}
                         className={styles.option}
-                        onClick={() => setPreference(option.value)}
+                        onClick={() => {
+                            trackGoal(option.value === "system" ? "theme_auto" : `theme_${option.value}`);
+                            setPreference(option.value);
+                        }}
                     >
                         {selected && (
                             <motion.span
