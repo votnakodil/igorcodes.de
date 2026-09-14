@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+echo "===== Pre-commit: production build ====="
+
+npm run build
+
+echo "===== Pre-commit: staging fresh dist ====="
+
+git add -A dist
+
+echo "===== Build completed successfully ====="
