@@ -1,0 +1,44 @@
+.recommendation-container-margin {
+    margin-top: 70px;
+}
+
+.recommendation-headline-font-size {
+    font-size: 35px;
+}
+
+.recommendation-image-margin {
+    margin-right: 2.5rem;
+}
+
+.image-container {
+    width: 23%;
+}
+
+.image-style {
+    width: 100%;
+    object-fit: contain;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .reduce-image-sm-screen {
+        width: 40%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .recommendation-image-margin {
+        margin-right: 1rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .recommendation-container-margin {
+        margin-top: -350px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .recommendation-container-margin {
+        margin-top: -300px;
+    }
+}

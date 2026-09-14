@@ -1,0 +1,16 @@
+.livetv-container {
+    padding-bottom: 10%;
+}
+
+.livetv-headline {
+    font-size: 30;
+    line-height: 2.2rem;
+}
+
+.gradient-text {
+    line-height: 2.6rem;
+    font-size: 40px;
+    background-image: linear-gradient(to right, #0355CE, #6CB1FA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

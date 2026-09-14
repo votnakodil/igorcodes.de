@@ -1,0 +1,131 @@
+.insta {
+    @include setupSection($position: relative);
+
+    &__decoration-left {
+        @include setupDecoration($top: 0px, $left: 0px);
+    }
+
+    &__body {
+        @include setupBody($position: relative, $flexDir: column, $marginT: 230px);
+
+        @include breakpoint(sm) {
+            margin-top: 20px;
+        }
+    }
+
+    &__data {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    &__title {
+        @include fontConfig($semiBoldFont, 40px, 600);
+        width: 100%;
+        max-width: 468px;
+
+        @include breakpoint(md) {
+            font-size: 32px;
+            text-align: center;
+        }
+
+        @include breakpoint(sm) {
+            font-size: 23px;
+            text-align: center;
+        }
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
+        aspect-ratio: 288 / 72;
+        max-width: 288px;
+        max-height: 72px;
+        background-color: #e07153;
+        background-image: url("../images/positions/btnBackground.svg");
+        background-size: cover;
+        border: none;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+    &__btn-image {
+        width: 15%;
+        max-width: 32px;
+    }
+
+    &__btn-label {
+        @include fontConfig($semiBoldFont, 24px, 700, white);
+        margin-left: 16px;
+
+        @include breakpoint(sm) {
+            font-size: 18px;
+            text-align: center;
+            margin-left: 5px;
+        }
+    }
+
+    &__images {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 58px;
+
+        @include breakpoint(sm) {
+            margin-top: 20px;
+        }
+    }
+
+    &__horizontal-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 75.33%;
+        max-width: 924px;
+        max-height: 520px;
+        gap: 2.1%;
+    }
+
+    &__horizontal-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+
+        &:last-child {
+            img:first-child {
+                width: 66.24%;
+                max-width: 612px;
+            }
+        }
+    }
+
+    &__image {
+        width: 32.47%;
+        max-width: 300px;
+        max-height: 254px;
+    }
+
+    &__vertical-block {
+        width: 23.6%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            max-width: 288px;
+            max-height: 520px;
+        }
+    }
+
+    &__decoration-right {
+        @include setupDecoration($right: -9%, $top: -25%, $width: 50%, $maxWidth: 596px);
+    }
+}
+.title--orange {
+}

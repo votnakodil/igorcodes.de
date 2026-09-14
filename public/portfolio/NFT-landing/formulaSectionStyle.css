@@ -1,0 +1,213 @@
+#formula__section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 429px;
+	padding-top: 65px;
+	background-color: black;
+}
+
+.formula__horizontal-block {
+	display: flex;
+	padding: 0px 19px;
+	justify-content: center;
+	width: 900px;
+}
+
+.headline__vertical-block {
+	display: flex;
+	flex-direction: column;
+	width: 645px;
+}
+
+.formula__white-headline {
+	font-family: "StoneSoupNFW01";
+	font-size: 40px;
+	line-height: 46px;
+	color: white;
+	letter-spacing: 2.5px;
+}
+
+.headline__horizontal-block {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 53px;
+	padding-right: 33px;
+}
+
+.formula__green-headline {
+	font-family: "StoneSoupNFW01";
+	font-size: 40px;
+	line-height: 38.6px;
+	color: #C2E978;
+	letter-spacing: 2.5px;
+	padding-right: 28px;
+}
+
+#formula__arrow {
+	object-fit: contain;
+}
+
+#equation__block {
+	width: 340px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.formula__white-text {
+	font-family: "StoneSoupNFW01";
+	font-size: 27px;
+	line-height: 28px;
+	color: white;
+	letter-spacing: 2.5px;
+}
+
+#formula__devider {
+	width: 100%;
+	padding-top: 4px;
+	padding-bottom: 1px;
+}
+
+.formula__square {
+	width: 1128px;
+	height: 188px;
+	background: linear-gradient(to bottom, #10121D, #191D2E);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 32px;
+	padding-right: 42px;
+}
+
+#decoration__leaf-thirteen {
+	position: absolute;
+	top: -30px;
+	left: 35px;
+	z-index: 1;
+}
+
+#decoration__leaf-fourteen {
+	position: absolute;
+	bottom: -16px;
+	left: 109px;
+	z-index: 1;
+}
+
+#decoration__leaf-fifteen {
+	position: absolute;
+	top: -20px;
+	right: 45px;
+	z-index: 1;
+}
+
+#decoration__leaf-sixteen {
+	position: absolute;
+	bottom: -13px;
+	right: 215px;
+	z-index: 1;
+}
+
+#equation__square-block {
+	width: 362px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+#formula__square-devider {
+	width: 100%;
+	padding-top: 11px;
+	padding-bottom: 14px;
+}
+
+#equation__white-pic {
+	padding-top: 15px;
+	
+}
+
+#markOne {
+	position: absolute;
+	top: -7px;
+	left: 34px;
+	z-index: 1;
+}
+
+#markTwo {
+	position: absolute;
+	top: -7px;
+	left: 200px;
+	z-index: 1;
+}
+
+#equation__green-pic {
+	margin-left: -8px;
+	padding-bottom: 4px;
+	
+}
+
+#mark__line {
+	position: absolute;
+	bottom: -22px;
+	right: -19px;
+	z-index: 1;
+}
+
+#formula__section-button {
+	margin-left: 35px;
+	width: 277px;
+	height: 80px;
+	border: none;
+	background-color: #C2E978;
+	border-radius: 10px;
+	font-family: "TTLakesNeue";
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 21.42px;
+	letter-spacing: 2.5px;
+	padding-top: 4px;
+	padding-left: 2px;
+}
+
+.vertical__mark-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 9px;
+	height: 67px;
+}
+
+.horizontal__mark-block {
+	display: flex;
+	align-items: center;
+}
+
+.mark__icon {
+	background-image: url("images/ellipse.png");
+	width: 24px;
+	height: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mark__sign {
+	height: 12px;
+}
+
+.mark__text {
+	padding-left: 12px;
+	font-family: "TTLakesNeue";
+	font-size: 15px;
+	line-height: 24px;
+	color: #B2B2B2;
+}

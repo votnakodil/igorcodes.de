@@ -1,0 +1,331 @@
+.positions {
+    @include setupSection;
+
+    &__body {
+        @include setupBody($flexDir: column, $marginT: 135px, $position: relative);
+
+        @include breakpoint(sm) {
+            margin-top: 35px;
+        }
+    }
+
+    &__headline {
+        display: flex;
+        position: relative;
+
+        @include breakpoint(sm) {
+            justify-content: center;
+        }
+    }
+
+    &__mascot {
+        position: absolute;
+        left: -80px;
+        top: -35px;
+        width: 10%;
+        max-width: 64px;
+
+        @include breakpoint(lg, md) {
+            left: -60px;
+        }
+
+        @include breakpoint(sm) {
+            left: 0px;
+            top: -55px;
+        }
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 39px;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            margin-top: 0px;
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        top: 50%;
+        right: -#{button-position($giftSwitchButtonSize)};
+        transform: translateY(-50%);
+
+        @include breakpoint(md, lg) {
+            $giftSwitchButtonSize: 65px;
+            right: -#{button-position($giftSwitchButtonSize)};
+        }
+
+        @include breakpoint(sm) {
+            top: 46%;
+            $giftSwitchButtonSize: 32px;
+            right: -#{button-position($giftSwitchButtonSize)};
+        }
+    }
+
+    &__decoration {
+        @include setupDecoration($top: 15px, $right: -10%, $width: 7%);
+    }
+}
+
+.headline-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 32px;
+
+    @include breakpoint(sm) {
+        margin-right: 10px;
+
+        &:nth-child(3) {
+            margin: 0;
+        }
+    }
+
+    &__main {
+        @include fontConfig($mediumFont, 48px, 600);
+
+        @include breakpoint(sm) {
+            font-size: 16px;
+        }
+    }
+
+    &__secondary {
+        @include fontConfig($mediumFont, 48px, 500, #b7b7b7);
+
+        @include breakpoint(sm) {
+            font-size: 16px;
+        }
+    }
+}
+
+.food-card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 32.13%;
+    max-width: 392px;
+
+    @include breakpoint(sm) {
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+    }
+
+    &__header {
+        display: flex;
+        position: relative;
+
+        @include breakpoint(sm) {
+            justify-content: center;
+        }
+    }
+
+    &__image {
+        width: 100%;
+
+        @include breakpoint(sm) {
+            width: 80%;
+        }
+    }
+
+    &__main {
+        margin: 26px 24px 0;
+
+        @include breakpoint(sm) {
+            margin: 16px;
+        }
+    }
+
+    &__title {
+        @include fontConfig($regularFont, 24px, 600);
+        display: flex;
+        min-height: 30px;
+        margin: 4px 0;
+
+        @include breakpoint(lg, sm) {
+            font-size: 17px;
+            align-items: center;
+        }
+
+        @include breakpoint(md) {
+            font-size: 12px;
+            align-items: center;
+        }
+
+        @include breakpoint(sm) {
+            text-align: center;
+            justify-content: center;
+        }
+    }
+
+    &__subtitle {
+        @include fontConfig($regularFont, 14px, 400);
+        display: flex;
+        height: 51px;
+
+        @include breakpoint(sm) {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        margin: 0 24px 18px;
+        justify-content: space-between;
+        margin-top: 19px;
+
+        @include breakpoint(md, lg) {
+            margin-top: 30px;
+        }
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            margin: 0 0 18px;
+            width: 100%;
+            align-items: center;
+        }
+    }
+}
+
+.qualities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    width: 13.4%;
+    max-width: 51px;
+    left: 12px;
+    top: 6px;
+
+    &__image {
+        width: 100%;
+        max-width: 32px;
+        height: 32px;
+        margin-top: 6px;
+
+        @include breakpoint(lg, md, sm) {
+            margin-top: 0px;
+        }
+    }
+
+    &__headline {
+        @include fontConfig($regularFont, 12px, 600);
+        margin-top: 4px;
+
+        @include breakpoint(lg, md, sm) {
+            font-size: 7px;
+            margin-top: 0px;
+        }
+    }
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -16px;
+    top: 16px;
+    width: 19%;
+    max-width: 72px;
+    aspect-ratio: 1/1;
+    background-color: #a1dcdc;
+    border-radius: 50%;
+
+    @include breakpoint(sm) {
+        right: 0;
+        top: 0;
+    }
+
+    &__text {
+        @include fontConfig($boldFont, 20px, 800, white);
+
+        @include breakpoint(lg) {
+            font-size: 16px;
+        }
+
+        @include breakpoint(md, sm) {
+            font-size: 12px;
+        }
+    }
+}
+
+.food-weight {
+    display: flex;
+    align-items: center;
+
+    @include breakpoint(sm) {
+        text-align: center;
+        justify-content: center;
+    }
+
+    &__label {
+        @include fontConfig($regularFont, 14px, 400, #b7b7b7);
+    }
+
+    &__separator {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: #e07153;
+        margin: 0 8px;
+    }
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+
+    &__old {
+        @include fontConfig($regularFont, 14px, 400, #b7b7b7);
+        text-decoration-line: line-through;
+        line-height: 11px;
+    }
+
+    &__new {
+        @include fontConfig($boldFont, 32px, 700);
+
+        @include breakpoint(lg) {
+            font-size: 25px;
+        }
+
+        @include breakpoint(md, sm) {
+            font-size: 20px;
+        }
+    }
+}
+
+.order-btn {
+    border: none;
+    background-color: #e07153;
+    background-image: url("../images/positions/btnBackground.svg");
+    background-size: cover;
+    width: 52.33%;
+    max-width: 180px;
+    max-height: 44px;
+    border-radius: 2px;
+    cursor: pointer;
+
+    @include breakpoint(md, sm) {
+        width: 45%;
+        height: 32px;
+    }
+
+    &__label {
+        @include fontConfig($semiBoldFont, 14px, 700, white);
+
+        @include breakpoint(md) {
+            font-size: 12px;
+        }
+    }
+}
+
+.switch-button {
+    &__arrow {
+    }
+}

@@ -10,3 +10,4 @@ google-analytics/
 
 # Exclude a file
 secrets.js
+node_modules

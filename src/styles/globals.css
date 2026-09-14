@@ -1,0 +1,59 @@
+html {
+    background: var(--color-background);
+    color: var(--color-text-primary);
+
+    font-family: var(--font-system);
+    font-synthesis: none;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    transition:
+        background-color var(--transition-default),
+        color var(--transition-default);
+}
+
+body {
+    min-height: 100vh;
+
+    background: var(--color-background);
+    user-select: none;
+    -webkit-user-select: none;
+
+    transition:
+        background-color var(--transition-default),
+        color var(--transition-default);
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+::selection {
+    color: #ffffff;
+    background: var(--color-accent);
+}
+
+
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+.brand-icon, .link-arrow { display: inline-block; flex-shrink: 0; vertical-align: middle; }
+.link-arrow { transform: translate3d(0, 0, 0); will-change: transform; }
+a:hover > .link-arrow, a:focus-visible > .link-arrow { animation: linkArrowNudge 480ms cubic-bezier(.2,.8,.2,1) 1 both; }
+a:hover > .link-arrow-down, a:focus-visible > .link-arrow-down { animation-name: linkArrowDown; }
+button:hover .link-arrow-down, button:focus-visible .link-arrow-down { animation: linkArrowDown 520ms cubic-bezier(.2,.8,.2,1) 1 both; }
+@keyframes linkArrowNudge { 0%, 100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(3px,-3px,0); } }
+@keyframes linkArrowDown { 0%, 100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,4px,0); } }
+@media (prefers-reduced-motion: reduce) {
+    a:hover > .link-arrow, a:focus-visible > .link-arrow,
+    button:hover .link-arrow-down, button:focus-visible .link-arrow-down { animation: none; }
+}

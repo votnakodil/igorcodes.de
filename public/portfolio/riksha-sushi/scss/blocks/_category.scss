@@ -1,0 +1,289 @@
+.category {
+    @include setupSection;
+
+    &__body {
+        @include setupBody($flexDir: column, $marginT: 120px);
+
+        @include breakpoint(sm) {
+            margin-top: 20px;
+        }
+    }
+
+    &__headline {
+        display: flex;
+        align-items: center;
+
+        @include breakpoint(sm) {
+            justify-content: center;
+        }
+    }
+
+    &__mascot {
+        width: 10%;
+        max-width: 64px;
+    }
+
+    &__options {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 16px;
+        flex-wrap: wrap;
+        margin: 44px 0 31px 0;
+    }
+
+    &__options-items {
+        display: flex;
+        width: 100%;
+        padding: 0 12px;
+        margin: 18px 0;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__options-item {
+        padding: 0 19.9px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__options-item--picked {
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        background-color: #e07153;
+        border-radius: 12px;
+        box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    &__options-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 4px;
+    }
+
+    &__options-title {
+        @include fontConfig($regularFont, 16px, 600);
+        text-decoration: none;
+    }
+
+    &__cards-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__cards-row {
+        display: flex;
+        justify-content: space-between;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &:first-child .food-card__subtitle {
+            @include breakpoint(sm, md) {
+                height: 110px;
+            }
+
+            @include breakpoint(lg) {
+                height: 60px;
+            }
+        }
+
+        &:first-child .food-card--white {
+            @include breakpoint(sm, md) {
+                margin: 5% 0;
+            }
+            @include breakpoint(lg) {
+                margin: 2% 0;
+            }
+        }
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 48px 40px 0 24px;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0px 0 0px;
+        }
+    }
+}
+.headline-button {
+    &__main {
+    }
+}
+.food-card--white {
+}
+.food-card {
+    &__header {
+    }
+
+    &__image {
+    }
+
+    &__main {
+    }
+
+    &__row {
+    }
+
+    &__title {
+    }
+
+    &__subtitle {
+    }
+
+    &__footer {
+    }
+}
+.label {
+    &__text {
+    }
+}
+.food-weight {
+    &__label {
+    }
+
+    &__separator {
+    }
+}
+.food-size {
+    &__up {
+    }
+
+    &__label {
+    }
+
+    &__down {
+    }
+}
+.size-btn--picked {
+    &__label {
+    }
+}
+.size-btn {
+    &__label {
+    }
+}
+.price {
+    &__old {
+    }
+
+    &__new {
+    }
+}
+.order-btn {
+    &__label {
+    }
+}
+.label--green {
+}
+.qualities {
+    &__image {
+    }
+
+    &__headline {
+    }
+}
+.nav-pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 283px;
+    height: 56px;
+}
+.arrow-btn {
+    @include makeTransparentButton($width: 100%, $height: 36px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 36px;
+
+    &__image {
+        width: 100%;
+        max-width: 36px;
+        aspect-ratio: 1;
+    }
+}
+.page-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 36px;
+    height: 41px;
+    cursor: pointer;
+    background-color: transparent;
+
+    &__text {
+        @include fontConfig($regularFont, 20px, 400);
+    }
+}
+.page-btn--picked {
+    display: flex;
+    position: relative;
+
+    p {
+        color: #c95c3f;
+    }
+
+    &::before {
+        width: 56px;
+        height: 56px;
+        content: "";
+        position: absolute;
+        top: -6px;
+        bottom: 0;
+        left: -11px;
+        right: 0;
+        padding: 1px;
+        border-radius: 100%;
+        background: linear-gradient(to bottom, #c95c3f 30%, transparent 31%, transparent 69%, #c95c3f 0%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+
+        @include breakpoint(sm) {
+            width: 36px;
+            height: 36px;
+            top: 2px;
+            bottom: 0;
+            left: -1px;
+            right: 0;
+        }
+    }
+}
+
+.catalog-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 272px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+
+    &__text {
+        @include fontConfig($regularFont, 24px, 600, #c95c3f);
+        padding-right: 16px;
+
+        @include breakpoint(sm) {
+            font-size: 15px;
+            padding-right: 8px;
+        }
+    }
+}

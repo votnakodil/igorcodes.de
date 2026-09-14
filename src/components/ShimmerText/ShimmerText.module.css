@@ -1,0 +1,57 @@
+.text {
+    position: relative;
+    display: inline-block;
+}
+
+.text::after {
+    --shimmer-position: -28%;
+
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    background-image: linear-gradient(
+        105deg,
+        transparent calc(var(--shimmer-position) - 24%),
+        color-mix(in srgb, white 92%, var(--color-accent) 8%) var(--shimmer-position),
+        transparent calc(var(--shimmer-position) + 24%)
+    );
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    opacity: 0;
+    will-change: opacity;
+    animation: shimmer 2.8s linear infinite;
+}
+
+.relaxed::after {
+    animation-name: shimmerRelaxed;
+    animation-duration: 5.6s;
+}
+
+@property --shimmer-position {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -28%;
+}
+
+@keyframes shimmer {
+    0% { --shimmer-position: -28%; opacity: 1; }
+    28.571% { --shimmer-position: 128%; opacity: 1; }
+    29.3%, 99.9% { --shimmer-position: 128%; opacity: 0; }
+    100% { --shimmer-position: -28%; opacity: 0; }
+}
+
+@keyframes shimmerRelaxed {
+    0% { --shimmer-position: -28%; opacity: 1; }
+    14.286% { --shimmer-position: 128%; opacity: 1; }
+    14.65%, 99.9% { --shimmer-position: 128%; opacity: 0; }
+    100% { --shimmer-position: -28%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text::after {
+        display: none;
+        animation: none;
+    }
+}

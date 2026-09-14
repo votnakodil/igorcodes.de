@@ -1,0 +1,105 @@
+.advantage {
+    @include setupSection($position: relative, $marginT: 133px);
+
+    @include breakpoint(sm, md) {
+        margin-top: 70px;
+    }
+
+    &__decoration {
+        @include setupDecoration($left: 0, $top: -128px, $width: 12%);
+    }
+
+    &__body {
+        @include setupBody($justifyCont: space-between);
+
+        @include breakpoint(sm) {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        right: 13px;
+        bottom: 40px;
+        background-image: url("../images/gift/redCircle.png");
+        background-size: contain;
+        box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.4);
+
+        @include makeRoundButton(110px, 110px, column);
+
+        @include breakpoint(sm) {
+            @include makeRoundButton(51px, 51px, column);
+            right: 5%;
+        }
+
+        @include breakpoint(md) {
+            bottom: 190px;
+        }
+    }
+
+    &__btn-icon {
+        @include breakpoint(sm) {
+            width: 15%;
+        }
+    }
+
+    &__btn-title {
+        @include fontConfig($regularFont, 15px, 600, white);
+
+        @include breakpoint(sm) {
+            @include fontConfig($regularFont, 9px, 400, white);
+        }
+    }
+}
+
+.advantage-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(sm, md) {
+        text-align: center;
+    }
+
+    @include breakpoint(md) {
+        width: 165px;
+    }
+
+    &__container {
+        width: 180px;
+        height: 107px;
+    }
+
+    &__title {
+        @include fontConfig($semiBoldFont, 32px, 700);
+    }
+
+    &__circle {
+        position: relative;
+        width: 72px;
+        height: 72px;
+        background-color: #e07153;
+        border-radius: 50%;
+        margin-top: -30px;
+    }
+
+    &__icon {
+        position: absolute;
+        right: -15px;
+    }
+
+    &__subtitle {
+        @include fontConfig($semiBoldFont, 14px, 700);
+        margin-top: 12px;
+    }
+
+    &__comment {
+        @include fontConfig($regularFont, 14px, 400);
+        margin-top: 2px;
+
+        @include breakpoint(sm) {
+            width: 90%;
+        }
+    }
+}

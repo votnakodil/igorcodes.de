@@ -1,553 +1,173 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="en" data-language="en" data-language-preference="auto">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title id="title">Игорь Волков - iOS-разработчик</title>
-        <link rel="stylesheet" type="text/css" href="./css/style.css" />
-        <script src="./js/languageContent.js"></script>
-        <script src="./js/language.js"></script>
-        <script src="./js/favicon.js"></script>
-        <script type="text/javascript" src="./js/yandex-metrika/metrika.js"></script>
-        <script async type="text/javascript" src="./js/google-analytics/analyticsManager.js"></script>
-        <script async type="text/javascript" src="./js/google-analytics/analytics.js"></script>
-        <script defer src="./js/darkmode.js"></script>
-        <script defer src="./js/header.js"></script>
-        <script defer src="./js/projects.js"></script>
-        <script defer src="./js/footer.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+        <title>Igor Volkov — Developer</title>
+
+        <meta
+            name="description"
+            content="Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences."
+        />
+
+        <meta name="author" content="Igor Volkov" />
+        <meta name="robots" content="index, follow" />
+
+        <link rel="canonical" href="https://igorcodes.de/" />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+        <meta name="theme-color" content="#ffffff" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Igor Volkov" />
+        <meta property="og:title" content="Igor Volkov — Developer" />
+        <meta
+            property="og:description"
+            content="Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences."
+        />
+        <meta property="og:url" content="https://igorcodes.de/" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="ru_RU" />
+        <meta property="og:image" content="https://igorcodes.de/social-preview.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/webp" />
+        <meta property="og:image:alt" content="Igor Volkov — Developer" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Igor Volkov — Developer" />
+        <meta
+            name="twitter:description"
+            content="Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences."
+        />
+        <meta name="twitter:image" content="https://igorcodes.de/social-preview.webp" />
+        <meta name="twitter:image:alt" content="Igor Volkov — Developer" />
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Person",
+                        "@id": "https://igorcodes.de/#person",
+                        "name": "Igor Volkov",
+                        "alternateName": "Игорь Волков",
+                        "url": "https://igorcodes.de/",
+                        "sameAs": [
+                            "https://github.com/votnakodil",
+                            "https://www.linkedin.com/in/igorvo1kov"
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://igorcodes.de/#website",
+                        "url": "https://igorcodes.de/",
+                        "name": "Igor Volkov",
+                        "inLanguage": ["en", "ru"],
+                        "publisher": {
+                            "@id": "https://igorcodes.de/#person"
+                        }
+                    }
+                ]
+            }
+        </script>
+
+        <script>
+            (() => {
+                const storageKey = "language";
+                const validPreferences = new Set(["en", "ru", "auto"]);
+
+                let preference = "auto";
+
+                try {
+                    const storedPreference = localStorage.getItem(storageKey);
+
+                    if (validPreferences.has(storedPreference)) {
+                        preference = storedPreference;
+                    } else {
+                        const legacyPreference = localStorage.getItem("lang");
+                        const migratedPreference = legacyPreference === "autoLang" ? "auto" : legacyPreference;
+
+                        if (validPreferences.has(migratedPreference)) {
+                            preference = migratedPreference;
+                            localStorage.setItem(storageKey, preference);
+                        }
+                    }
+                } catch {
+                    // localStorage may be unavailable in restricted browser contexts.
+                }
+
+                const browserLanguages = navigator.languages?.length
+                    ? navigator.languages
+                    : [navigator.language];
+
+                const browserLanguage = browserLanguages[0]?.toLowerCase() ?? "en";
+                const detectedLanguage = browserLanguage.startsWith("ru") ? "ru" : "en";
+                const language = preference === "auto" ? detectedLanguage : preference;
+
+                document.documentElement.lang = language;
+                document.documentElement.dataset.language = language;
+                document.documentElement.dataset.languagePreference = preference;
+
+                const metadata = {
+                    en: {
+                        title: "Igor Volkov — Developer",
+                        description: "Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences.",
+                        locale: "en_US",
+                    },
+                    ru: {
+                        title: "Игорь Волков — Разработчик",
+                        description: "Личный сайт и портфолио Игоря Волкова — разработчика мобильных и веб-продуктов.",
+                        locale: "ru_RU",
+                    },
+                }[language];
+
+                document.title = metadata.title;
+
+                const setMetaContent = (selector, content) => {
+                    document.querySelector(selector)?.setAttribute("content", content);
+                };
+
+                setMetaContent('meta[name="description"]', metadata.description);
+                setMetaContent('meta[property="og:title"]', metadata.title);
+                setMetaContent('meta[property="og:description"]', metadata.description);
+                setMetaContent('meta[property="og:locale"]', metadata.locale);
+                setMetaContent('meta[name="twitter:title"]', metadata.title);
+                setMetaContent('meta[name="twitter:description"]', metadata.description);
+            })();
+        </script>
+
+        <script>
+            (() => {
+                const storedTheme = localStorage.getItem("theme");
+                const preference = storedTheme === "light" || storedTheme === "dark" || storedTheme === "system"
+                    ? storedTheme
+                    : "system";
+                const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light";
+                const resolvedTheme = preference === "system" ? systemTheme : preference;
+
+                document.documentElement.dataset.theme = resolvedTheme;
+                document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
+                document.documentElement.style.colorScheme = resolvedTheme;
+
+                const themeColor = document.querySelector('meta[name="theme-color"]');
+                if (themeColor) {
+                    themeColor.setAttribute("content", resolvedTheme === "dark" ? "#000000" : "#ffffff");
+                }
+            })();
+        </script>
     </head>
+
     <body>
-        <header class="header">
-            <div class="container">
-                <div class="header__body">
-                    <a href="https://igorcodes.ru" class="logo">
-                        <img class="logo__image" src="./assets/images/header/laurelLeafLeft.png" alt="laurelLeafLeft" />
-                        <span class="logo__text" id="logo__text">ИВ</span>
-                        <img class="logo__image" src="./assets/images/header/laurelLeafRight.png" alt="laurelLeafRight" />
-                    </a>
-                    <div class="header__nav-container">
-                        <nav class="menu">
-                            <ul class="menu__list">
-                                <li class="menu__item">
-                                    <a class="menu__link" id="link1" href="#projects">Проекты</a>
-                                </li>
-                                <li class="menu__item">
-                                    <a class="menu__link" id="link2" href="./about.html">Обо мне</a>
-                                </li>
-                                <li class="menu__item">
-                                    <a class="menu__link" id="link3" href="./resume.html">Резюме</a>
-                                </li>
-                                <li class="menu__item">
-                                    <a class="menu__link" id="link4" href="./contact.html">Связаться</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="socials">
-                            <ul class="socials__list">
-                                <li class="socials__item">
-                                    <a class="socials__link" href="https://github.com/artexhibit" target="_blank">
-                                        <img class="socials__image" src="./assets/images/header/githubDark.svg" alt="github" />
-                                    </a>
-                                </li>
-                                <li class="socials__item">
-                                    <a class="socials__link" href="https://www.linkedin.com/in/igorvo1kov" target="_blank">
-                                        <img class="socials__image" src="./assets/images/header/linkedInDark.svg" alt="linkedIn" />
-                                    </a>
-                                </li>
-                                <li class="socials__item">
-                                    <a class="socials__link" href="https://t.me/artexhib1t" target="_blank">
-                                        <img class="socials__image" src="./assets/images/header/telegramDark.svg" alt="telegram" />
-                                    </a>
-                                </li>
-                                <li class="socials__item">
-                                    <a class="socials__link" href="mailto:ceo@igorcodes.ru" target="_blank">
-                                        <img class="socials__image" src="./assets/images/header/envelopeDark.svg" alt="envelope" />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="header__hamburger">
-                        <button class="hamburger">
-                            <p class="hamburger__title" id="hamb__title">Меню</p>
-                            <div class="hamburger__bars-container">
-                                <span class="hamburger__bar"></span>
-                                <span class="hamburger__bar"></span>
-                                <span class="hamburger__bar"></span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <section class="name">
-            <div class="container">
-                <div class="name__body">
-                    <div class="wrapper">
-                        <img class="name__image" src="./assets/images/name/portrait.png" alt="portrait" />
-                        <p class="name__title" id="name__title">Игорь Волков</p>
-                        <p class="name__subtitle" id="name__subtitle">Расширяя горизонты: мой путь в мире мобильной и веб-разработки</p>
-                    </div>
-                    <div class="double-chevron">
-                        <div class="arrow">
-                            <span class="arrow__half"></span>
-                            <span class="arrow__half"></span>
-                        </div>
-                        <div class="arrow">
-                            <span class="arrow__half"></span>
-                            <span class="arrow__half"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="projects" id="projects">
-            <div class="container">
-                <div class="projects__body">
-                    <div class="projects__topic">
-                        <h2 class="headline" id="headline1">Проекты</h2>
-                    </div>
-                    <div class="projects__tabs">
-                        <div class="projects__tabs-container">
-                            <div class="tab active" id="swift">
-                                <a href="" class="tab__item">
-                                    <img class="tab__image" src="./assets/images/projects/swift.svg" alt="Swift" />
-                                    <p class="tab__title" id="tab1">Свифт</p>
-                                </a>
-                            </div>
-                            <div class="tab" id="web">
-                                <a href="" class="tab__item">
-                                    <img class="tab__image" src="./assets/images/projects/html5.svg" alt="html5" />
-                                    <p class="tab__title" id="tab2">Веб-разработка</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="projects__tabs-slider"></div>
-                    </div>
-                    <div class="projects__cards">
-                        <div class="card swift">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image short" src="./assets/images/projects/kursvalut.png" alt="kursvalut" />
-                                </div>
-                                <p class="card__title" id="card__title1">Kursvalut</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle1">
-                                            Удобный конвертер валют по курсу ЦБ РФ и Форекс. Приложение написано с нуля на UIKit на Storyboard и без использования сторонних библиотек.
-                                            <br />
-                                            <br />
-                                            Доступна загрузка курсов валют из нескольких источников. А для хранения данных офлайн используется CoreData. Доступна Про версия на StoreKit, открывающая расширенные возможности.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button1">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">UIKit</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">iOS</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href=".//portfolio/kursvalut/kursvalut.html" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/globe.svg" alt="globe" />
-                                            <p class="link__title" id="link__title1">Открыть сайт</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                        <a href="https://github.com/artexhibit/Kursvalut" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <span class="tooltip" id="tooltip1">Открыть на Github</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card swift">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/customNumpad.png" alt="customNumpad" />
-                                </div>
-                                <p class="card__title" id="card__title6">CustomNumpad</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle6">
-                                            Моя реализация клавиатуры с цифрами и простыми вычислительными операциями для использования в пет-проекте.
-                                            <br />
-                                            <br />
-                                            Я использую её в пет-проекте вместо стандартной цифровой клавиатуры Apple, чтобы пользователи могли получить дополнительную функциональность и красивый дизайн.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button6">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">UIKit</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">iOS</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">Storyboard</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">XIB</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">UIBezierPath</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">CAShapeLayer</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href="https://github.com/artexhibit/CustomNumpad" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <p class="link__title" id="link__title6">Открыть Github</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card swift">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/customPopup.png" alt="customPopup" />
-                                </div>
-                                <p class="card__title" id="card__title7">CustomPopup</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle7">
-                                            Моя реализация всплывающего уведомления, которое Apple использует в iOS.
-                                            <br />
-                                            <br />
-                                            Я создал его для использования в пет-проектах, чтобы отображать информацию пользователю в нативном дизайне, но с раширенным функционалом: текст прокручивается, если он длиннее ширины попапа, может изменять отображаемые данные на ходу.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button7">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">UIKit</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">iOS</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">Storyboard</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">XIB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href="https://github.com/artexhibit/CustomPopup" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <p class="link__title" id="link__title7">Открыть Github</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card swift">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/customUIViewWithDatePicker.png" alt="customUIViewWithDatePicker" />
-                                </div>
-                                <p class="card__title" id="card__title8">UIViewWithDatePicker</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle8">
-                                            Моя реализация UIView для переключения между опциями и UIDatePicker, с возможностью подтверждать или отменять действие с помощью кнопок.
-                                            <br />
-                                            <br />
-                                            Результатом работы стало умение создавать собственные кастомные элементы интерфейса и использовать их в приложении.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button8">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">UIKit</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">iOS</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">Storyboard</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">XIB</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">UITapGestureRecognizer</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href="https://github.com/artexhibit/CustomUIViewWithDatePicker" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <p class="link__title" id="link__title8">Открыть Github</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card web animateOut">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/NFT.png" alt="NFT" />
-                                </div>
-                                <p class="card__title" id="card__title2">Проект &#171;NFT&#187;</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle2">Вёрстка лендинга сайта про NFT. Это моё первое знакомство с веб-версткой как таковой. Здесь я познакомился с основами верстки, отработал и освоил основные концепции, приёмы.</p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button2">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">HTML</p>
-                                        </div>
-                                        <div class="tag">
-                                            <p class="tag__title">CSS</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href=".//portfolio/NFT-landing/index.html" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/eye.svg" alt="demo" />
-                                            <p class="link__title" id="link__title2">Открыть проект</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                        <a href="https://github.com/artexhibit/Fundamentals-of-algorithmization-and-programming/tree/main/HTML/Вёрстка%20HTML/Вёрстка%20NFT%20проекта%20(ПР%20№5%2027%3A12)" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <span class="tooltip" id="tooltip2">Открыть на Github</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card web animateOut">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/liveTV.png" alt="liveTV" />
-                                </div>
-                                <p class="card__title" id="card__title3">Онлайн-кинотеатр &#171;LiveTV&#187;</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle3">
-                                            Вёрстка лендинга сайта на фреймворке Bootstrap. В процессе работы с ним я изучил различные компоненты и стили, такие как навигация, кнопки, формы и модальные окна.
-                                            <br />
-                                            <br />
-                                            Также я познакомился с принципами создания адаптивного дизайна. Мне понравилось использование готовых стилей и классов Bootstrap, которые позволяют быстро и просто настроить внешний вид элементов и добавить анимации. В целом, работа с Bootstrap значительно упростила процесс верстки.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button3">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">Bootstrap</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href=".//portfolio/liveTV-cinema/index.html" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/eye.svg" alt="demo" />
-                                            <p class="link__title" id="link__title3">Открыть проект</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                        <a href="https://github.com/artexhibit/Fundamentals-of-algorithmization-and-programming/tree/main/HTML/Вёрстка%20Bootstrap/Онлайн%20кинотеатр%20LiveTV" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <span class="tooltip" id="tooltip3">Открыть на Github</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card web animateOut">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/riksha.png" alt="riksha" />
-                                </div>
-                                <p class="card__title" id="card__title4">Магазин суши &#171;Riksha&#187;</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle4">
-                                            Вёрстка лендинга на препроцессоре SASS/SCSS. Здесь я научился использовать мощные функции, такие как переменные для упрощения управления значениями, миксины для создания переиспользуемых стилей с параметрами, и вложенность для структурирования кода.
-                                            <br />
-                                            <br />
-                                            Также я использовал операторы для манипулирования значениями свойств, что помогло создать гибкий дизайн. В целом, использование SASS/SCSS значительно повысило эффективность и организованность моей верстки лендинга.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button4">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">SASS/SCSS</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href=".//portfolio/riksha-sushi/index.html" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/eye.svg" alt="demo" />
-                                            <p class="link__title" id="link__title4">Открыть проект</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                        <a href="https://github.com/artexhibit/Fundamentals-of-algorithmization-and-programming/tree/main/HTML/Вёрстка%20SASS%2CSCSS/Магазин%20суши%20Riksha" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <span class="tooltip" id="tooltip4">Открыть на Github</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card web animateOut">
-                            <div class="card__content">
-                                <div class="card__cover">
-                                    <img class="card__image" src="./assets/images/projects/pages.png" alt="pages" />
-                                </div>
-                                <p class="card__title" id="card__title5">Книжный магазин &#171;Pages&#187;</p>
-                                <div class="card__button-container">
-                                    <div class="card__subtitle-container">
-                                        <p class="card__subtitle" id="card__subtitle5">
-                                            Вёрстка лендинга на фреймворке Tailwind. Работа с данным фреймворком позволила мне использовать класс-центричную методологию и быстро применять стили через добавление классов в HTML. Это обеспечило последовательный и единообразный дизайн веб-сайта.
-                                            <br />
-                                            <br />
-                                            Также фреймворк предлагает множество предварительно определенных стилей и утилит, а также настраиваемых классов и компонентов, позволяющих создавать разнообразные стили без необходимости дополнительного CSS-кода.
-                                            <br />
-                                            <br />
-                                            Tailwind значительно ускорил мой рабочий процесс.
-                                        </p>
-                                    </div>
-                                    <div class="card__button-wrapper">
-                                        <button class="card__button">
-                                            <p class="card__button-title" id="card__button5">Раскрыть</p>
-                                            <img class="card__button-icon" src="./assets/images/projects/chevron.svg" alt="chevron" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card__bottom">
-                                    <div class="card__tags">
-                                        <div class="tag">
-                                            <p class="tag__title">Tailwind</p>
-                                        </div>
-                                    </div>
-                                    <div class="card__links">
-                                        <a href=".//portfolio/pages-bookstore/index.html" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/eye.svg" alt="demo" />
-                                            <p class="link__title" id="link__title5">Открыть проект</p>
-                                            <img class="link__arrow" src="./assets/images/projects/arrowRightBlue.svg" alt="arrow" />
-                                        </a>
-                                        <a href="https://github.com/artexhibit/Fundamentals-of-algorithmization-and-programming/tree/main/HTML/Вёрстка%20Tailwind/Книжный%20магазин%20Pages" class="link" target="_blank">
-                                            <img class="link__icon-blue" src="./assets/images/projects/githubBlue.svg" alt="github" />
-                                            <span class="tooltip" id="tooltip5">Открыть на Github</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <footer class="footer">
-            <div class="container">
-                <div class="footer__body">
-                    <div class="footer__quote">
-                        <q class="quote" id="quote">Путешествие - это награда</q>
-                    </div>
-                    <div class="footer__switches">
-                        <div class="footer__switch-theme">
-                            <p class="footer__switch-title" id="switch__title1">Тема</p>
-                            <div class="switch" id="theme">
-                                <button class="switch__button" id="light">
-                                    <img class="switch__icon" src="./assets/images/footer/sun.svg" alt="sun" />
-                                    <span class="switch__icon-wave"></span>
-                                    <p class="switch__option" id="switch__option1">Светлая</p>
-                                </button>
-                                <button class="switch__button" id="dark">
-                                    <img class="switch__icon" src="./assets/images/footer/moon.svg" alt="moon" />
-                                    <p class="switch__option" id="switch__option2">Тёмная</p>
-                                </button>
-                                <button class="switch__button" id="autoTheme">
-                                    <img class="switch__icon" src="./assets/images/footer/pc.svg" alt="pc" />
-                                    <p class="switch__option" id="switch__option3">Авто</p>
-                                </button>
-                                <div class="switch__slider"></div>
-                            </div>
-                        </div>
-                        <div class="footer__switch-lang">
-                            <p class="footer__switch-title" id="switch__title2">Язык</p>
-                            <div class="switch" id="lang">
-                                <button class="switch__button" id="ru">
-                                    <img class="switch__icon" src="./assets/images/footer/rus.svg" alt="rus" />
-                                    <p class="switch__option" id="switch__option4">Русский</p>
-                                </button>
-                                <button class="switch__button" id="en">
-                                    <img class="switch__icon" src="./assets/images/footer/usa.svg" alt="usa" />
-                                    <p class="switch__option" id="switch__option5">Английский</p>
-                                </button>
-                                <button class="switch__button" id="autoLang">
-                                    <img class="switch__icon" src="./assets/images/footer/pc.svg" alt="pc" />
-                                    <p class="switch__option" id="switch__option6">Авто</p>
-                                </button>
-                                <div class="switch__slider"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer__settings">
-                        <button class="settings__button">
-                            <img class="settings__button-icon" src="./assets/images/footer/gear.svg" alt="gear" />
-                            <img class="settings__button-icon--close" src="./assets/images/footer/close.svg" alt="close" />
-                            <p class="settings__button-title" id="settings">Настройки</p>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <script type="text/javascript" src="./js/yandex-metrika/metrikaDisabledTracker.js"></script>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
     </body>
 </html>

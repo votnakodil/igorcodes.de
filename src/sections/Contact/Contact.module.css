@@ -1,0 +1,131 @@
+.contact {
+    padding:
+        var(--section-padding-block)
+        var(--content-padding)
+        clamp(20px, 2vw, 28px);
+
+    color: var(--color-text-primary);
+    background: var(--color-surface);
+}
+
+.inner {
+    width: min(100%, var(--content-width));
+    margin: 0 auto;
+}
+
+.eyebrow { margin-bottom: 16px; color: var(--color-accent); font-size: 13px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+
+.title {
+    max-width: 780px;
+
+    font-size: var(--font-section-title);
+    font-weight: 600;
+    line-height: var(--font-section-title-line-height);
+    letter-spacing: -0.055em;
+}
+
+.description {
+    max-width: 620px;
+    margin-top: clamp(30px, 4vw, 44px);
+
+    color: var(--color-text-secondary);
+
+    font-size: clamp(19px, 2vw, 24px);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.025em;
+}
+
+.action {
+    min-height: 48px;
+    margin-top: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 22px;
+
+    border-radius: var(--radius-pill);
+
+    color: #ffffff;
+    background: var(--color-button);
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: background-color var(--transition-fast);
+}
+
+.action:hover {
+    background: var(--color-button-hover);
+}
+
+.links {
+    margin-top: clamp(112px, 10vw, 144px);
+    padding-top: 26px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 28px;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: var(--color-text-secondary);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: color var(--transition-fast);
+}
+
+.links a:hover {
+    color: var(--color-text-primary);
+}
+
+@media (max-width: 600px) {
+    .description {
+        margin-top: 28px;
+
+        font-size: 19px;
+    }
+
+    .action {
+        margin-top: 30px;
+    }
+
+    .links {
+        margin-top: 88px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .description {
+        font-size: 22px;
+        line-height: 26px;
+    }
+
+    .action {
+        min-height: 48px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .links {
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+    }
+}
+
+.links a { gap: 8px; }

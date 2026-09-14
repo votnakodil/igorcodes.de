@@ -1,0 +1,27 @@
+@font-face {
+	font-family: "StoneSoupNFW01";
+	src: url("fonts/Stone Soup NF W01 Regular.woff") format("truetype"); 
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "TTLakesNeue";
+	src: url("fonts/TTLakesNeue Medium.woff") format("truetype"); 
+	font-style: normal;
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: "TTLakesNeue"; 
+	src: url("fonts/TTLakesNeue Regular.woff") format("truetype"); 
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "TTLakesNeue"; 
+	src: url("fonts/TTLakesNeue Bold.woff") format("truetype"); 
+	font-style: normal;
+	font-weight: bold;
+}

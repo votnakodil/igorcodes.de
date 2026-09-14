@@ -1,0 +1,59 @@
+.token__section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 500px;
+	background-color: black;
+}
+
+.token__headline {
+	padding-top: 27px;
+	padding-bottom: 22px;
+	width: 540px;
+	font-family: "StoneSoupNFW01";
+	font-size: 40px;
+	line-height: 46px;
+	letter-spacing: 2.5px;
+	color: white;
+	text-align: center;
+}
+
+.horizontal__container {
+	padding-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 1126px;
+}
+
+.token__card {
+	display: flex;
+	flex-direction: column;
+	width: 558px;
+	height: 192px;
+	background-color: #191D2E;
+}
+
+.token__green-text {
+	padding-top: 32px;
+	padding-left: 26px;
+	font-family: "StoneSoupNFW01";
+	font-size: 32px;
+	line-height: 40px;
+	color: #C2E978;
+	letter-spacing: 2.5px;
+	text-align: left;
+}
+
+.token__white-text {
+	padding-top: 6px;
+	padding-left: 26px;
+	padding-right: 30px;
+	font-family: "TTLakesNeue";
+	font-size: 20px;
+	line-height: 28px;
+	color: white;
+	text-align: left;
+}

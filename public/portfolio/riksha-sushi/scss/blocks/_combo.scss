@@ -1,0 +1,208 @@
+.combo {
+    @include setupSection($marginT: 72px);
+    background-color: rgba(245, 249, 250, 0.6);
+
+    @include breakpoint(sm) {
+        margin-top: 20px;
+    }
+
+    &__body {
+        @include setupBody($flexDir: column, $marginT: 80px, $position: relative);
+
+        @include breakpoint(sm) {
+            margin-top: 20px;
+        }
+    }
+
+    &__decoration {
+        @include setupDecoration($left: -137px, $top: 50px, $width: 15%);
+    }
+
+    &__headline {
+        display: flex;
+        align-items: center;
+
+        @include breakpoint(sm) {
+            justify-content: center;
+        }
+    }
+
+    &__mascot {
+        width: 10%;
+        max-width: 64px;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 41px;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            margin-top: 0px;
+            align-items: center;   
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        top: 58.3%;
+        right: -#{button-position($giftSwitchButtonSize)};
+        transform: translateY(-50%);
+
+        @include breakpoint(md, lg) {
+            top: 60%;
+            $giftSwitchButtonSize: 65px;
+            right: -#{button-position($giftSwitchButtonSize)};
+        }
+
+        @include breakpoint(sm) {
+            top: 52%;
+            $giftSwitchButtonSize: 42px;
+            right: -#{button-position($giftSwitchButtonSize)};
+        }
+    }
+}
+.headline-button {
+    margin-right: 1.31%;
+
+    &__main {
+    }
+}
+.food-card--white {
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-right: 24px;
+    width: 100%;
+    height: 100%;
+    max-width: 392px;
+    max-height: 479px;
+
+    @include breakpoint(sm) {
+        margin-top: 10px;
+        margin-right: 0px;
+    }
+
+    &:nth-child(3) {
+        margin-right: 0;
+    }
+}
+.food-card {
+    &__header {
+    }
+
+    &__image {
+    }
+
+    &__main {
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-top: -19px;
+
+        @include breakpoint(lg, md, sm) {
+            flex-direction: column-reverse;
+        }
+    }
+
+    &__title {
+    }
+
+    &__subtitle {
+    }
+
+    &__footer {
+    }
+}
+.subtitle-underline {
+    text-decoration: underline;
+}
+.label--green {
+    background-color: #62e2b4;
+}
+.label {
+    &__text {
+    }
+}
+.food-weight {
+    @include breakpoint(lg, md, sm) {
+        align-self: self-start;
+        margin-top: 10%;
+
+        @include breakpoint(sm) {
+            align-self: center;
+            margin-top: 3%;
+        }
+    }
+
+    &__label {
+    }
+
+    &__separator {
+    }
+}
+.food-size {
+    @include breakpoint(lg, md, sm) {
+        align-self: center;
+    }
+
+    &__up {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 3px;
+
+        @include breakpoint(sm) {
+            margin-top: 5px;
+        }
+    }
+
+    &__label {
+        @include fontConfig($regularFont, 12px, 600, #b7b7b7);
+    }
+
+    &__down {
+        display: flex;
+        align-items: center;
+    }
+}
+.size-btn--picked {
+    width: 55px;
+    height: 26px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e07153;
+    cursor: pointer;
+
+    &__label {
+        @include fontConfig($regularFont, 14px, 600, white);
+    }
+}
+.size-btn {
+    width: 55px;
+    height: 26px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+
+    &__label {
+        @include fontConfig($regularFont, 14px, 600, #b7b7b7);
+    }
+}
+.price {
+    &__old {
+    }
+
+    &__new {
+    }
+}
+.order-btn {
+    &__label {
+    }
+}
+.switch-button {
+    &__arrow {
+    }
+}

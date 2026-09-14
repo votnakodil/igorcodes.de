@@ -1,0 +1,4 @@
+.emphasis {
+    color: color-mix(in srgb, var(--color-text-primary) 45%, var(--color-text-secondary));
+    font-weight: 500;
+}
