@@ -3,6 +3,7 @@ import { animate, motion, useMotionValue, useReducedMotion, useDragControls } fr
 import { ProjectCard } from "@/components/ProjectCard/ProjectCard";
 import { useTranslation } from "@/features/language/useTranslation";
 import type { Project } from "@/types/project";
+import { completeAutoplayCycle } from "./projectAutoplayState";
 import styles from "./Projects.module.css";
 
 const slideSpring = { type: "spring", stiffness: 150, damping: 30, mass: 1 } as const;
@@ -11,9 +12,8 @@ const autoplayDuration = 20_000;
 export function ProjectGallery({ projects }: { projects: Project[] }) {
     const { t } = useTranslation();
     const reduceMotion = useReducedMotion();
-    const [active, setActive] = useState(0);
+    const [{ activeIndex: active, progressCycle }, setAutoplayState] = useState({ activeIndex: 0, progressCycle: 0 });
     const [stride, setStride] = useState(0);
-    const [progressCycle, setProgressCycle] = useState(0);
     const [autoplayRequested, setAutoplayRequested] = useState(true);
     const [isGalleryVisible, setIsGalleryVisible] = useState(false);
     const [isDocumentVisible, setIsDocumentVisible] = useState(() => document.visibilityState === "visible");
@@ -25,8 +25,10 @@ export function ProjectGallery({ projects }: { projects: Project[] }) {
     const dragControls = useDragControls();
     const last = projects.length - 1;
     const select = useCallback((index: number) => {
-        setActive(Math.max(0, Math.min(last, index)));
-        setProgressCycle(cycle => cycle + 1);
+        setAutoplayState(current => ({
+            activeIndex: Math.max(0, Math.min(last, index)),
+            progressCycle: current.progressCycle + 1,
+        }));
     }, [last]);
     const canAutoplay = !reduceMotion && projects.length > 1;
     const isAutoplayRunning = canAutoplay && autoplayRequested && isGalleryVisible && isDocumentVisible;
@@ -37,10 +39,11 @@ export function ProjectGallery({ projects }: { projects: Project[] }) {
     };
 
     const advanceAutoplay = useCallback(() => {
-        if (!autoplayRequested || !isDocumentVisible || isCardHovered.current) return;
-        setActive(current => current === last ? 0 : current + 1);
-        setProgressCycle(cycle => cycle + 1);
-    }, [autoplayRequested, isDocumentVisible, last]);
+        setAutoplayState(current => completeAutoplayCycle({
+            ...current,
+            lastIndex: last,
+        }));
+    }, [last]);
 
     useLayoutEffect(() => {
         const element = track.current;
