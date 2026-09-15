@@ -11,7 +11,6 @@ import {
     liquidPopoverContentExit,
     liquidPopoverContentTransition,
     liquidPopoverItemTransition,
-    liquidPopoverMorph,
     liquidPopoverPanelTransition,
 } from "@/motion/liquidPopover";
 
@@ -68,7 +67,7 @@ function geometryEquals(left: PopoverGeometry, right: PopoverGeometry) {
 }
 
 export function ResumeDownload() {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const reduceMotion = useReducedMotion();
     const buttonSpring = reduceMotion
         ? { duration: 0 }
@@ -78,11 +77,16 @@ export function ResumeDownload() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [open, setOpen] = useState(false);
+    const openRef = useRef(open);
     const [panelMounted, setPanelMounted] = useState(false);
     const [geometry, setGeometry] = useState<PopoverGeometry>(initialGeometry);
     const [code, setCode] = useState(makeCode);
     const [value, setValue] = useState("");
     const [error, setError] = useState(false);
+
+    useEffect(() => {
+        openRef.current = open;
+    }, [open]);
 
     const refresh = useCallback(() => {
         setCode(makeCode());
@@ -96,7 +100,7 @@ export function ResumeDownload() {
 
         const rect = button.getBoundingClientRect();
         const surfaceOrigin = getResumeSurfaceOrigin(window.scrollX, window.scrollY);
-        const panelSize = getResumePanelSize(window.innerWidth, window.innerHeight);
+        const panelSize = getResumePanelSize(window.innerWidth, window.innerHeight, error, language);
         const { width: panelWidth, height: panelHeight, mobile } = panelSize;
         const fitsRight = window.innerWidth - rect.right >= panelWidth + PANEL_GAP + VIEWPORT_PADDING;
         const side: PlacementSide = fitsRight ? "right" : "below";
@@ -105,7 +109,14 @@ export function ResumeDownload() {
             : mobile
                 ? Math.max(VIEWPORT_PADDING, (window.innerWidth - panelWidth) / 2)
                 : Math.max(VIEWPORT_PADDING, Math.min(rect.left, window.innerWidth - panelWidth - VIEWPORT_PADDING));
-        const preferredTop = getResumePanelPreferredTop(side, mobile, rect.top);
+        const preferredTop = getResumePanelPreferredTop(
+            side,
+            mobile,
+            rect.top,
+            rect.height,
+            panelHeight,
+            window.innerHeight,
+        );
         const panelTop = Math.max(
             VIEWPORT_PADDING,
             Math.min(preferredTop, window.innerHeight - panelHeight - VIEWPORT_PADDING),
@@ -125,7 +136,7 @@ export function ResumeDownload() {
         };
 
         setGeometry(current => geometryEquals(current, nextGeometry) ? current : nextGeometry);
-    }, []);
+    }, [error, language]);
 
     useLayoutEffect(() => {
         updateGeometry();
@@ -228,7 +239,7 @@ export function ResumeDownload() {
             width: MOBILE_DROP_SIZE,
             height: MOBILE_DROP_SIZE,
             x: geometry.buttonLeft + geometry.buttonWidth / 2 - MOBILE_DROP_SIZE / 2,
-            y: geometry.buttonTop + geometry.buttonHeight - MOBILE_DROP_SIZE / 2,
+            y: geometry.buttonTop + geometry.buttonHeight / 2 - MOBILE_DROP_SIZE / 2,
             borderRadius: 999,
         };
     const panelTarget = {
@@ -282,7 +293,7 @@ export function ResumeDownload() {
                 style={{ left: geometry.surfaceLeft, top: geometry.surfaceTop }}
                 blur={11}
                 contrast={18}
-                filterPadding={128}
+                filterPadding={32}
                 fill="var(--color-button)"
             >
                 {panelMounted && (
@@ -301,7 +312,7 @@ export function ResumeDownload() {
                 )}
 
                 {panelMounted && (
-                    <Liquid.Item morph={liquidPopoverMorph} transition={liquidPopoverItemTransition}>
+                    <Liquid.Item observe radius={26} transition={liquidPopoverItemTransition}>
                         <motion.div
                             ref={panelRef}
                             role="dialog"
@@ -315,15 +326,15 @@ export function ResumeDownload() {
                             animate={open ? { ...panelTarget, opacity: 1 } : { ...dropOrigin, opacity: 1 }}
                             transition={reduceMotion ? { duration: 0 } : liquidPopoverPanelTransition}
                             onAnimationComplete={() => {
-                                if (!open) setPanelMounted(false);
+                                if (!openRef.current) setPanelMounted(false);
                             }}
                         >
                             <AnimatePresence>
                                 {open && (
                                     <motion.div
                                         className={styles.content}
-                                        initial={{ opacity: 0, x: -5 }}
-                                        animate={{ opacity: 1, x: 0 }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
                                         exit={liquidPopoverContentExit}
                                         transition={liquidPopoverContentTransition}
                                     >

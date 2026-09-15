@@ -24,11 +24,11 @@ export const liquidPopoverItemTransition = {
 } as const;
 
 export const liquidPopoverPanelTransition = {
-    x: { type: "spring", stiffness: 500, damping: 44, mass: 1 },
-    y: { type: "spring", stiffness: 500, damping: 44, mass: 1 },
-    width: { type: "spring", stiffness: 480, damping: 44, mass: 1 },
-    height: { type: "spring", stiffness: 480, damping: 44, mass: 1 },
-    borderRadius: { duration: 0.1, ease: [0.2, 0.9, 0.3, 1] },
+    x: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+    y: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+    width: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+    height: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+    borderRadius: { duration: 0.42, ease: [0.2, 0.9, 0.3, 1] },
 } as const;
 
 export const liquidPopoverExitTransition = {

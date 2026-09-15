@@ -7,10 +7,6 @@
     isolation: isolate;
 }
 
-.downloadControl[data-panel-side="below"] {
-    z-index: 899;
-}
-
 .resumeGoo {
     position: absolute !important;
     z-index: 900;
@@ -100,7 +96,7 @@
     overflow: hidden;
     border-radius: 26px;
     color: #fff;
-    background: transparent;
+    background: var(--color-button);
 }
 
 .panel:not([data-open]) {

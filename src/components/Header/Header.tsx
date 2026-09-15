@@ -27,19 +27,18 @@ export function Header() {
     const menuOpen = activePopover === "menu";
     const settingsOpen = activePopover === "settings";
     const compactSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
-    const adaptiveHeader = typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
     const rightAlignedSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 1397px)").matches;
     const settingsGooWidth = typeof window !== "undefined" ? Math.min(292, Math.max(0, window.innerWidth - 28)) : 292;
-    const settingsButtonWidth = compactSettings ? 40 : language === "ru" ? 108 : 94;
+    const settingsButtonWidth = compactSettings ? 40 : language === "ru" ? 110.53125 : 91.75;
     // On desktop the panel is centered under the full Settings pill. On the
     // compact layout the panel fills the available width, so its drop should
     // land at the pill's right-hand button instead of travelling to the
     // panel's (off-screen) centre.
-    const settingsIconCenterX = adaptiveHeader ? 20 : 16.5;
+    const settingsIconCenterX = compactSettings ? 20 : 16.5;
     const settingsDropX = rightAlignedSettings
         ? settingsIconCenterX + 9 - settingsButtonWidth
         : 9 - settingsGooWidth / 2;
-    const settingsDropY = adaptiveHeader ? -53 : -58;
+    const settingsDropY = compactSettings ? -53 : -58;
 
     const closePopovers = useCallback(() => {
         if (!activePopover) return;

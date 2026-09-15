@@ -217,7 +217,7 @@
 }
 
 .settings {
-    --settings-button-width: 94px;
+    --settings-button-width: 91.75px;
     position: relative;
     flex: 0 0 var(--settings-button-width);
     width: var(--settings-button-width);
@@ -226,7 +226,7 @@
     margin-right: 5px;
 }
 
-.settings[data-language="ru"] { --settings-button-width: 108px; }
+.settings[data-language="ru"] { --settings-button-width: 110.53125px; }
 
 .settingsGoo {
     position: absolute !important;
@@ -265,8 +265,9 @@
     border-radius: var(--radius-pill);
     color: #ffffff;
     background: var(--color-button);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
+    line-height: 20px;
     cursor: pointer;
     z-index: 2203;
     pointer-events: auto;
@@ -285,7 +286,7 @@
 
 .settingsIconOverlay {
     position: absolute;
-    top: 8px;
+    top: 7.5px;
     left: 9px;
     z-index: 2305;
     width: 15px;
@@ -302,6 +303,8 @@
     display: grid;
     place-items: center;
     transform-origin: 50% 50%;
+    transform: rotate(.001deg);
+    will-change: transform;
     transition: transform 520ms cubic-bezier(.2,.8,.2,1);
 }
 
@@ -312,7 +315,7 @@
     color: #ffffff;
 }
 
-.settingsIconOverlayOpen .settingsIconRotor { transform: rotate(360deg); }
+.settingsIconOverlayOpen .settingsIconRotor { transform: rotate(360.001deg); }
 
 .settingsPanel {
     position: absolute;
@@ -387,24 +390,6 @@
         flex-basis: 40px;
     }
 
-    .settings,
-    .settingsButtonItem,
-    .settingsButton {
-        height: 40px;
-    }
-
-    .settingsButton {
-        min-height: 40px;
-        padding-inline: 12px;
-    }
-
-    .settingsIconOverlay {
-        top: 12px;
-        left: 12px;
-        width: 16px;
-        height: 16px;
-    }
-
     .right {
         width: auto;
     }
@@ -437,6 +422,7 @@
     .settings {
         flex-basis: 40px;
         width: 40px;
+        height: 40px;
         margin-right: 0;
     }
 
