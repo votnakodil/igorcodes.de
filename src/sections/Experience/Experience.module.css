@@ -2,7 +2,7 @@
 .inner { max-width: var(--content-width); margin: 0 auto; }
 .header { margin-bottom: clamp(52px, 7vw, 88px); }
 .eyebrow { margin-bottom: 16px; color: var(--color-accent); font-size: 13px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
-.title { max-width: 100%; font-size: var(--font-section-title-compact); font-weight: 600; line-height: var(--font-section-title-compact-line-height); letter-spacing: -.045em; text-wrap: balance; overflow-wrap: anywhere; }
+.title { max-width: 100%; font-family: var(--font-display); font-size: var(--font-section-title-compact); font-weight: 600; line-height: var(--font-section-title-compact-line-height); letter-spacing: -.045em; text-wrap: balance; overflow-wrap: anywhere; }
 .timeline { margin: 0; padding: 0; list-style: none; }
 .step { position: relative; padding: 0 0 70px 60px; }
 .step::before { content: ""; position: absolute; left: 10px; top: 12px; bottom: -12px; width: 1px; background: var(--color-accent); opacity: .4; }
@@ -14,7 +14,7 @@
 .step:first-child .dot::after { animation-delay: 2.6s; }
 .step article { max-width: 850px; }
 .date { color: var(--color-accent); font-size: 14px; line-height: 1.6; font-variant-numeric: tabular-nums; }
-.role { margin-top: 12px; font-size: clamp(25px, 3vw, 36px); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; overflow-wrap: anywhere; }
+.role { margin-top: 12px; font-family: var(--font-display); font-size: clamp(25px, 3vw, 36px); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; overflow-wrap: anywhere; }
 .subtitle { margin-top: 10px; color: var(--color-text-secondary); font-size: 18px; line-height: 1.5; }
 .subtitle a { display: inline-flex; align-items: center; gap: 4px; }
 .subtitle a svg { margin-left: 5px; }
