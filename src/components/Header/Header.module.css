@@ -433,12 +433,6 @@
     .mobileMenu {
         display: block;
     }
-}
-
-@media (max-width: 420px) {
-    .right {
-        gap: 8px;
-    }
 
     .settings {
         flex-basis: 40px;
@@ -491,6 +485,12 @@
         height: 20px;
     }
 
+}
+
+@media (max-width: 420px) {
+    .right {
+        gap: 8px;
+    }
 }
 
 .settingRow + .settingRow {

@@ -26,7 +26,7 @@ export function Header() {
     const controlsRef = useRef<HTMLDivElement>(null);
     const menuOpen = activePopover === "menu";
     const settingsOpen = activePopover === "settings";
-    const compactSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 420px)").matches;
+    const compactSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
     const adaptiveHeader = typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
     const rightAlignedSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 1397px)").matches;
     const settingsGooWidth = typeof window !== "undefined" ? Math.min(292, Math.max(0, window.innerWidth - 28)) : 292;
