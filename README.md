@@ -1,6 +1,6 @@
-<img width="900" alt="igorcodes.de responsive portfolio preview" src="README/readme.webp">
+**English** | [Русский](README/README-RUS.md)
 
-[🇷🇺 Russian Version](README/README-RUS.md)
+<img width="900" alt="igorcodes.de responsive portfolio preview" src="README/readme.png">
 
 ## About
 
@@ -11,9 +11,7 @@
 - English and Russian localization;
 - responsive layouts for mobile and desktop screens;
 - light and dark themes;
-- animated sections and project galleries;
-- downloadable résumé;
-- SEO metadata, sitemap, and Yandex Metrica analytics.
+- SEO metadata and sitemap.
 
 ## Stack
 
