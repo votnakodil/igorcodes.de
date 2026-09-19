@@ -1,19 +1,36 @@
-<img width="900" src="https://raw.githubusercontent.com/artexhibit/igorcodes.ru/master/assets/docs/Demo.png">
+<img width="900" alt="igorcodes.de responsive portfolio preview" src="README/readme.webp">
 
 [🇷🇺 Russian Version](README/README-RUS.md)
 
 ## About
 
-My personal website, built from scratch, based on what I learned about web-development in a college.
+[igorcodes.de](https://igorcodes.de) is my personal portfolio and a home for the projects I have built while growing as a software developer. The current version is a bilingual, responsive single-page application focused on presenting my experience, selected web and iOS projects, and the technologies I work with.
 
-## Goal
+## Features
 
-The main goal for me was to create a functional, modern and well-designed multipage website with all of my main pet-projects, which I made during learning Swift and web-development. I wanted to apply all the knowlege I gained during my first year in a college.
+- English and Russian localization;
+- responsive layouts for mobile and desktop screens;
+- light and dark themes;
+- animated sections and project galleries;
+- downloadable résumé;
+- SEO metadata, sitemap, and Yandex Metrica analytics.
 
 ## Stack
 
--   HTML;
--   JavaScript;
--   SASS/SCSS;
--   BEM methodology;
--   Adapted for all common mobile and web screen sizes;
+- React 19;
+- TypeScript 6;
+- Vite 8;
+- CSS Modules and custom CSS;
+- Motion for interface animations;
+- Liquid Gooey and Symbols React for interface effects and icons;
+- Oxlint for static analysis.
+
+## Deployment
+
+The production build in `dist` is committed to the repository because the current Netcup Webhosting 1000 plan does not provide Node.js. A native Git pre-commit hook builds the site and stages the refreshed `dist` directory as part of the same commit. After a push, a GitHub webhook triggers Plesk, which publishes the contents of `dist` to `httpdocs`.
+
+After cloning the repository on a new machine, enable the versioned hooks once:
+
+```bash
+git config core.hooksPath .githooks
+```
