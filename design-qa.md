@@ -69,16 +69,16 @@
   - `/var/folders/l0/8hpkr62n4ts7j6w7cf8k_rb40000gn/T/codex-clipboard-5cebb7b4-cfe7-47c7-9775-ceccf38a2aaf.webp` and `/var/folders/l0/8hpkr62n4ts7j6w7cf8k_rb40000gn/T/codex-clipboard-914573a6-8de1-49e7-b73a-b05e79367975.webp` for the Safari glass reference.
 - Implementation evidence: Codex in-app Browser tab 12, 1280 × 720 CSS px, light and dark themes. Captures were emitted inline; the browser API exposes no screenshot filesystem path.
 - Rating: the count and label now use a 2 px row gap and a normal 10 px line height.
-- Header glass: the original 40px blur made large text behind the bar dissolve into indistinct shapes. The balanced glass keeps blur at 4.5px and restores the page-background color at 80% opacity so the bar remains white in light mode instead of forming a gray strip. Backdrop contrast is reduced to 80% and brightness set to 105%, fading the content beneath the glass independently from the bar color. Saturation remains subdued at 1.1. The resume button remains below the header layer.
-- Header activation: at `scrollY <= 1` the sticky header is transparent with no backdrop filter or divider. Once content starts passing beneath it, `data-scrolled` enables the complete glass material and divider.
+- Header glass: the established blur remains at 4.5px in both appearance modes. The material uses the active page background at 64% opacity so the header follows Safari's slightly darker toolbar tint without adding a separate gray layer. The resume button remains below the header layer.
+- Header activation: the header uses native CSS `sticky` positioning. Once content starts passing beneath it, `data-scrolled` enables the glass material without a separate bottom divider.
 - Resume button layering: the fixed liquid surface remains at z-index 900, the visible download control is now at 901, and the header remains at 1000. The button label therefore stays visible during the liquid transition while the entire control continues to pass beneath the header.
-- Layering: sticky header z-index is 1000, the fixed resume animation surface is 900, and the button control is 20.
-- Safari color: the rendered `meta[name="theme-color"]` remains `#0071e3` after React theme initialization in both appearance modes.
+- Layering: the sticky header z-index is 1000, the fixed resume animation surface is 900, and the button control is 20.
+- Safari chrome: the page does not set `meta[name="theme-color"]`, allowing Safari to keep its native translucent toolbar. `html` and `body` retain the active page background so that the toolbar material picks up the site's light or dark tint instead of falling back to a neutral system color.
 - Comparison history:
   - Earlier P2: `Ratings` touched the numeric count. Fix: added an explicit 2 px internal gap.
   - Earlier P1: the resume button and its fixed animation surface could paint above the sticky header. Fix: placed both below the header stacking layer.
   - Earlier P2: the header blur was sharper and more transparent than the supplied Safari reference. Fix: increased the blur to 40 px and the glass surface to 74% while retaining 180% saturation.
-  - Earlier P2: the initial blue `theme-color` was overwritten with white or black when React applied the selected theme. Fix: both initialization paths now keep `#0071e3`.
+  - Earlier P2: `theme-color` forced Safari's browser chrome to white or black. Making `html` and `body` transparent removed the forced color but left the toolbar neutral gray. Fix: removed only the browser-chrome override, retained the page background on `html` and `body`, and kept the header on native sticky positioning.
 - No actionable P0, P1, or P2 issue remains in this iteration.
 
 final result: passed

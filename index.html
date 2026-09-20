@@ -22,8 +22,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
 
-        <meta name="theme-color" content="#ffffff" />
-
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Igor Volkov" />
         <meta property="og:title" content="Igor Volkov — Developer" />
@@ -158,10 +156,6 @@
                 document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
                 document.documentElement.style.colorScheme = resolvedTheme;
 
-                const themeColor = document.querySelector('meta[name="theme-color"]');
-                if (themeColor) {
-                    themeColor.setAttribute("content", resolvedTheme === "dark" ? "#000000" : "#ffffff");
-                }
             })();
         </script>
 
