@@ -14,10 +14,38 @@ import {
     liquidPopoverItemTransition,
     liquidPopoverMorph,
     liquidPopoverPanelTransition,
+    settingsLiquidPopoverMorph,
 } from "@/motion/liquidPopover";
 
 import { nextHeaderPopover, type HeaderPopover } from "./headerPopoverState";
 import styles from "./Header.module.css";
+
+const settingsPanelSpring = {
+    type: "spring",
+    stiffness: 250,
+    damping: 18.2,
+    mass: 0.82,
+} as const;
+
+const settingsPanelExitSpring = {
+    ...settingsPanelSpring,
+    delay: 0.07,
+} as const;
+
+const settingsContentSpring = {
+    type: "spring",
+    stiffness: 320,
+    damping: 13.8,
+    mass: 0.62,
+    delay: 0.24,
+} as const;
+
+const settingsContentExitSpring = {
+    type: "spring",
+    stiffness: 420,
+    damping: 24,
+    mass: 0.55,
+} as const;
 
 export function Header() {
     const { t, language } = useTranslation();
@@ -27,18 +55,14 @@ export function Header() {
     const menuOpen = activePopover === "menu";
     const settingsOpen = activePopover === "settings";
     const compactSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
-    const rightAlignedSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 1397px)").matches;
     const settingsGooWidth = typeof window !== "undefined" ? Math.min(292, Math.max(0, window.innerWidth - 28)) : 292;
     const settingsButtonWidth = compactSettings ? 40 : language === "ru" ? 110.53125 : 91.75;
-    // On desktop the panel is centered under the full Settings pill. On the
-    // compact layout the panel fills the available width, so its drop should
-    // land at the pill's right-hand button instead of travelling to the
-    // panel's (off-screen) centre.
-    const settingsIconCenterX = compactSettings ? 20 : 16.5;
-    const settingsDropX = rightAlignedSettings
-        ? settingsIconCenterX + 9 - settingsButtonWidth
+    // Start the panel as a small blob centred beneath the Settings control.
+    // The liquid-gooey surface follows this element continuously as it grows.
+    const settingsDropX = compactSettings
+        ? 9 - settingsButtonWidth / 2
         : 9 - settingsGooWidth / 2;
-    const settingsDropY = compactSettings ? -53 : -58;
+    const settingsDropY = compactSettings ? -53 : -57.5;
 
     const closePopovers = useCallback(() => {
         if (!activePopover) return;
@@ -140,7 +164,7 @@ export function Header() {
 
                     <div className={styles.settings} data-language={language}>
                         <Liquid className={styles.settingsGoo} blur={11} contrast={18} filterPadding={128}
-                            fill="var(--color-button)" shadow="0 16px 42px rgba(0,73,170,.26)">
+                            fill="var(--color-button)">
                             <Liquid.Item className={styles.settingsButtonItem} observe radius={999}
                                 morph={{ advanced: { blobInset: 4 } }}>
                                 <button type="button" aria-expanded={settingsOpen} className={styles.settingsButton}
@@ -149,24 +173,43 @@ export function Header() {
                                         if (nextPopover === "settings") trackGoal("settings_open");
                                         setActivePopover(nextPopover);
                                     }}>
-                                    <span className={styles.settingsIconSlot} aria-hidden="true" />
+                                    <span className={`${styles.settingsIconSlot} ${settingsOpen ? styles.settingsIconSlotOpen : ""}`}
+                                        aria-hidden="true">
+                                        <span className={styles.settingsIconRotor}>
+                                            <IconGear className={styles.settingsIcon} fill="currentColor" width="17" height="17" />
+                                        </span>
+                                    </span>
                                     <span className={styles.settingsLabel}>{t("settings")}</span>
                                 </button>
                             </Liquid.Item>
                             <AnimatePresence>
                                 {settingsOpen && (
-                                    <Liquid.Item morph={liquidPopoverMorph}
+                                    <Liquid.Item morph={settingsLiquidPopoverMorph}
                                         transition={liquidPopoverItemTransition}>
                                         <motion.div className={styles.settingsPanel}
                                             initial={{ width: 18, height: 18, x: settingsDropX, y: settingsDropY, borderRadius: 999 }}
                                             animate={{ width: settingsGooWidth, height: 200, x: 0, y: 0, borderRadius: 24 }}
                                             exit={{ width: 18, height: 18, x: settingsDropX, y: settingsDropY, borderRadius: 999,
-                                                transition: liquidPopoverExitTransition }}
-                                            transition={liquidPopoverPanelTransition}>
+                                                transition: settingsPanelExitSpring }}
+                                            transition={settingsPanelSpring}>
                                             <motion.div className={styles.popoverContent}
-                                                initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
-                                                exit={liquidPopoverContentExit}
-                                                transition={liquidPopoverContentTransition}>
+                                                initial={{ opacity: 0, y: 14, scale: 0.9 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{
+                                                    opacity: 0,
+                                                    y: -6,
+                                                    scale: 0.95,
+                                                    transition: {
+                                                        opacity: { duration: 0.08 },
+                                                        y: settingsContentExitSpring,
+                                                        scale: settingsContentExitSpring,
+                                                    },
+                                                }}
+                                                transition={{
+                                                    opacity: { duration: 0.18, delay: 0.22, ease: "easeOut" },
+                                                    y: settingsContentSpring,
+                                                    scale: settingsContentSpring,
+                                                }}>
                                                 <h2 className={styles.popoverTitle}>{t("settings")}</h2>
                                                 <div className={styles.settingRow}>
                                                     <span className={styles.settingLabel}>{t("appearance")}</span>
@@ -182,12 +225,6 @@ export function Header() {
                                 )}
                             </AnimatePresence>
                         </Liquid>
-                        <span className={`${styles.settingsIconOverlay} ${settingsOpen ? styles.settingsIconOverlayOpen : ""}`}
-                            aria-hidden="true">
-                            <span className={styles.settingsIconRotor}>
-                                <IconGear className={styles.settingsIcon} fill="currentColor" width="17" height="17" />
-                            </span>
-                        </span>
                     </div>
                 </div>
             </div>

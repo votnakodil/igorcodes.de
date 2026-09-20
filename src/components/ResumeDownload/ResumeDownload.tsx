@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
-import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Liquid } from "liquid-gooey";
 
@@ -9,28 +8,65 @@ import { useTranslation } from "@/features/language/useTranslation";
 import { trackGoal } from "@/features/analytics/yandexMetrika";
 import {
     liquidPopoverContentExit,
-    liquidPopoverContentTransition,
     liquidPopoverItemTransition,
-    liquidPopoverPanelTransition,
+    resumeLiquidPopoverMorph,
 } from "@/motion/liquidPopover";
 
 import {
     getResumePanelPreferredTop,
     getResumePanelSize,
-    getResumeSurfaceOrigin,
 } from "./resumePopoverLayout";
 import styles from "./ResumeDownload.module.css";
 
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-const PANEL_GAP = 18;
+const PANEL_GAP = 24;
 const VIEWPORT_PADDING = 12;
 const MOBILE_DROP_SIZE = 18;
+const DROP_EDGE_INSET = 8;
+const RESUME_GOO_BLUR = 8;
+
+const resumePanelSpring = {
+    type: "spring",
+    stiffness: 250,
+    damping: 18.2,
+    mass: 0.82,
+} as const;
+
+const resumePanelExitSpring = {
+    ...resumePanelSpring,
+    delay: 0.07,
+} as const;
+
+const resumePanelExitTransition = {
+    x: resumePanelExitSpring,
+    y: resumePanelExitSpring,
+    width: resumePanelExitSpring,
+    height: resumePanelExitSpring,
+    borderRadius: {
+        duration: 0.16,
+        delay: 0.4,
+        ease: [0.22, 1, 0.36, 1],
+    },
+} as const;
+
+const resumeContentSpring = {
+    type: "spring",
+    stiffness: 300,
+    damping: 10.8,
+    mass: 0.68,
+    delay: 0.2,
+} as const;
+
+const resumeContentExitSpring = {
+    type: "spring",
+    stiffness: 420,
+    damping: 24,
+    mass: 0.55,
+} as const;
 
 type PlacementSide = "right" | "below";
 
 type PopoverGeometry = {
-    surfaceLeft: number;
-    surfaceTop: number;
     buttonLeft: number;
     buttonTop: number;
     buttonWidth: number;
@@ -43,8 +79,6 @@ type PopoverGeometry = {
 };
 
 const initialGeometry: PopoverGeometry = {
-    surfaceLeft: 0,
-    surfaceTop: 0,
     buttonLeft: 0,
     buttonTop: 0,
     buttonWidth: 220,
@@ -88,6 +122,10 @@ export function ResumeDownload() {
         openRef.current = open;
     }, [open]);
 
+    const hide = useCallback(() => {
+        setOpen(false);
+    }, []);
+
     const refresh = useCallback(() => {
         setCode(makeCode());
         setValue("");
@@ -99,7 +137,6 @@ export function ResumeDownload() {
         if (!button) return;
 
         const rect = button.getBoundingClientRect();
-        const surfaceOrigin = getResumeSurfaceOrigin(window.scrollX, window.scrollY);
         const panelSize = getResumePanelSize(window.innerWidth, window.innerHeight, error, language);
         const { width: panelWidth, height: panelHeight, mobile } = panelSize;
         const fitsRight = window.innerWidth - rect.right >= panelWidth + PANEL_GAP + VIEWPORT_PADDING;
@@ -122,8 +159,6 @@ export function ResumeDownload() {
             Math.min(preferredTop, window.innerHeight - panelHeight - VIEWPORT_PADDING),
         );
         const nextGeometry: PopoverGeometry = {
-            surfaceLeft: surfaceOrigin.left,
-            surfaceTop: surfaceOrigin.top,
             buttonLeft: rect.left,
             buttonTop: rect.top,
             buttonWidth: rect.width,
@@ -150,10 +185,10 @@ export function ResumeDownload() {
         updateGeometry();
         const handlePointerDown = (event: PointerEvent) => {
             const target = event.target as Node;
-            if (!panelRef.current?.contains(target) && !buttonRef.current?.contains(target)) setOpen(false);
+            if (!panelRef.current?.contains(target) && !buttonRef.current?.contains(target)) hide();
         };
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") setOpen(false);
+            if (event.key === "Escape") hide();
         };
         const focusTimer = window.setTimeout(() => inputRef.current?.focus(), 320);
 
@@ -164,7 +199,7 @@ export function ResumeDownload() {
             window.removeEventListener("pointerdown", handlePointerDown);
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [open, updateGeometry]);
+    }, [hide, open, updateGeometry]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -224,95 +259,74 @@ export function ResumeDownload() {
         trackGoal("resume_download");
         link.click();
         link.remove();
-        setOpen(false);
+        hide();
     };
 
-    const dropOrigin = geometry.side === "right"
-        ? {
-            width: geometry.buttonHeight,
-            height: geometry.buttonHeight,
-            x: geometry.buttonLeft + geometry.buttonWidth - geometry.buttonHeight,
-            y: geometry.buttonTop,
-            borderRadius: 999,
-        }
-        : {
-            width: MOBILE_DROP_SIZE,
-            height: MOBILE_DROP_SIZE,
-            x: geometry.buttonLeft + geometry.buttonWidth / 2 - MOBILE_DROP_SIZE / 2,
-            y: geometry.buttonTop + geometry.buttonHeight / 2 - MOBILE_DROP_SIZE / 2,
-            borderRadius: 999,
-        };
+    const dropOrigin = {
+        width: MOBILE_DROP_SIZE,
+        height: MOBILE_DROP_SIZE,
+        x: geometry.side === "right"
+            ? geometry.buttonWidth - MOBILE_DROP_SIZE - DROP_EDGE_INSET
+            : geometry.buttonWidth / 2 - MOBILE_DROP_SIZE / 2,
+        y: geometry.buttonHeight / 2 - MOBILE_DROP_SIZE / 2,
+        borderRadius: 999,
+    };
     const panelTarget = {
         width: geometry.panelWidth,
         height: geometry.panelHeight,
-        x: geometry.panelLeft,
-        y: geometry.panelTop,
+        x: geometry.panelLeft - geometry.buttonLeft,
+        y: geometry.panelTop - geometry.buttonTop,
         borderRadius: 26,
     };
-    return <>
+    return (
         <span className={styles.downloadControl} data-panel-side={open ? geometry.side : undefined}>
-            <motion.button
-                ref={buttonRef}
-                type="button"
-                className={styles.downloadButton}
-                onClick={open ? () => setOpen(false) : show}
-                aria-expanded={open}
-                aria-label={t("downloadResume")}
-                initial="rest"
-                animate="rest"
-                whileHover="hover"
-                whileFocus="hover"
-            >
-                <span className={styles.downloadMain}>
-                    <motion.span
-                        className={styles.downloadLabel}
-                        variants={{ rest: { y: 0 }, hover: { y: -9 } }}
-                        transition={buttonSpring}
-                    >
-                        {t("downloadResume")}
-                    </motion.span>
-                    <span className={styles.downloadArrow} aria-hidden="true"><ArrowIcon down /></span>
-                </span>
-                <motion.span
-                    className={styles.downloadDetails}
-                    aria-hidden="true"
-                    variants={{
-                        rest: { opacity: 0, y: 10, scale: 0.98 },
-                        hover: { opacity: 0.78, y: 0, scale: 1 },
-                    }}
-                    transition={buttonSpring}
-                >
-                    {t("resumeFileDetails")}
-                </motion.span>
-            </motion.button>
-        </span>
-
-        {createPortal(
             <Liquid
                 className={styles.resumeGoo}
-                style={{ left: geometry.surfaceLeft, top: geometry.surfaceTop }}
-                blur={11}
+                blur={RESUME_GOO_BLUR}
                 contrast={18}
-                filterPadding={32}
+                filterPadding={640}
                 fill="var(--color-button)"
             >
-                {panelMounted && (
-                    <Liquid.Item observe radius={999} morph={{ advanced: { blobInset: 4 } }}>
-                        <span
-                            className={styles.buttonShape}
-                            style={{
-                                left: geometry.buttonLeft,
-                                top: geometry.buttonTop,
-                                width: geometry.buttonWidth,
-                                height: geometry.buttonHeight,
-                            }}
+                <Liquid.Item observe radius={999} morph={{ advanced: { blobInset: 4 } }}>
+                    <motion.button
+                        ref={buttonRef}
+                        type="button"
+                        className={styles.downloadButton}
+                        onClick={open ? hide : show}
+                        aria-expanded={open}
+                        aria-label={t("downloadResume")}
+                        initial="rest"
+                        animate="rest"
+                        whileHover="hover"
+                        whileFocus="hover"
+                    >
+                        <span className={styles.downloadMain}>
+                            <motion.span
+                                className={styles.downloadLabel}
+                                variants={{ rest: { y: 0 }, hover: { y: -9 } }}
+                                transition={buttonSpring}
+                            >
+                                {t("downloadResume")}
+                            </motion.span>
+                            <span className={styles.downloadArrow} aria-hidden="true"><ArrowIcon down /></span>
+                        </span>
+                        <motion.span
+                            className={styles.downloadDetails}
                             aria-hidden="true"
-                        />
-                    </Liquid.Item>
-                )}
+                            variants={{
+                                rest: { opacity: 0, y: 10, scale: 0.98 },
+                                hover: { opacity: 0.78, y: 0, scale: 1 },
+                            }}
+                            transition={buttonSpring}
+                        >
+                            {t("resumeFileDetails")}
+                        </motion.span>
+                    </motion.button>
+                </Liquid.Item>
 
                 {panelMounted && (
-                    <Liquid.Item observe radius={26} transition={liquidPopoverItemTransition}>
+                    <Liquid.Item observe radius={26} morph={resumeLiquidPopoverMorph}
+                        transition={liquidPopoverItemTransition}>
                         <motion.div
                             ref={panelRef}
                             role="dialog"
@@ -324,7 +338,9 @@ export function ResumeDownload() {
                             className={styles.panel}
                             initial={reduceMotion ? { ...dropOrigin, opacity: 0 } : dropOrigin}
                             animate={open ? { ...panelTarget, opacity: 1 } : { ...dropOrigin, opacity: 1 }}
-                            transition={reduceMotion ? { duration: 0 } : liquidPopoverPanelTransition}
+                            transition={reduceMotion
+                                ? { duration: 0 }
+                                : open ? resumePanelSpring : resumePanelExitTransition}
                             onAnimationComplete={() => {
                                 if (!openRef.current) setPanelMounted(false);
                             }}
@@ -333,12 +349,25 @@ export function ResumeDownload() {
                                 {open && (
                                     <motion.div
                                         className={styles.content}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={liquidPopoverContentExit}
-                                        transition={liquidPopoverContentTransition}
+                                        initial={{ opacity: 0, y: 24, scale: 0.84 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{
+                                            ...liquidPopoverContentExit,
+                                            y: -6,
+                                            scale: 0.95,
+                                            transition: {
+                                                opacity: { duration: 0.08 },
+                                                y: resumeContentExitSpring,
+                                                scale: resumeContentExitSpring,
+                                            },
+                                        }}
+                                        transition={{
+                                            opacity: { duration: 0.18, delay: 0.18, ease: "easeOut" },
+                                            y: resumeContentSpring,
+                                            scale: resumeContentSpring,
+                                        }}
                                     >
-                                    <button type="button" className={styles.close} onClick={() => setOpen(false)} aria-label={t("captchaCancel")}>
+                                    <button type="button" className={styles.close} onClick={hide} aria-label={t("captchaCancel")}>
                                         <svg viewBox="0 0 24 24" aria-hidden="true">
                                             <path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5" />
                                         </svg>
@@ -366,7 +395,7 @@ export function ResumeDownload() {
                                         />
                                         {error && <p className={styles.error} role="alert">{t("captchaError")}</p>}
                                         <div className={styles.actions}>
-                                            <button type="button" className={styles.cancel} onClick={() => setOpen(false)}>{t("captchaCancel")}</button>
+                                            <button type="button" className={styles.cancel} onClick={hide}>{t("captchaCancel")}</button>
                                             <button type="submit" className={styles.submit}>{t("captchaSubmit")}</button>
                                         </div>
                                     </form>
@@ -376,8 +405,7 @@ export function ResumeDownload() {
                         </motion.div>
                     </Liquid.Item>
                 )}
-            </Liquid>,
-            document.body,
-        )}
-    </>;
+            </Liquid>
+        </span>
+    );
 }

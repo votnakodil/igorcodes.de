@@ -54,7 +54,7 @@ export function getResumePanelPreferredTop(
     panelHeight = DESKTOP_PANEL_MAX_HEIGHT,
     viewportHeight = 900,
 ) {
-    if (side === "right") return buttonTop - 72;
+    if (side === "right") return buttonTop + buttonHeight / 2 - panelHeight / 2;
     if (!mobile) return DESKTOP_VIEWPORT_PADDING;
 
     const minTop = DESKTOP_VIEWPORT_PADDING;

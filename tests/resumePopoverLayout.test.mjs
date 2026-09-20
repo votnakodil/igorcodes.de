@@ -31,5 +31,5 @@ test("keeps the mobile panel near the download button", () => {
     assert.equal(getResumePanelPreferredTop("below", true, 835, 48, 381, 956), 436);
     assert.equal(getResumePanelPreferredTop("below", true, 240, 48, 410, 500), 78);
     assert.equal(getResumePanelPreferredTop("below", false, 360), 12);
-    assert.equal(getResumePanelPreferredTop("right", false, 360), 288);
+    assert.equal(getResumePanelPreferredTop("right", false, 360), 118);
 });

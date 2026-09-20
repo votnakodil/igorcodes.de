@@ -8,20 +8,13 @@
 }
 
 .resumeGoo {
-    position: absolute !important;
-    z-index: 900;
-    width: 100vw;
-    height: 100dvh;
+    position: relative !important;
+    z-index: 1;
+    display: inline-flex;
+    width: fit-content;
+    height: 48px;
     overflow: visible !important;
-    pointer-events: none;
-}
-
-.buttonShape {
-    position: absolute;
-    display: block;
-    border-radius: var(--radius-pill);
-    background: transparent;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .downloadButton {
@@ -96,7 +89,7 @@
     overflow: hidden;
     border-radius: 26px;
     color: #fff;
-    background: var(--color-button);
+    background: transparent;
 }
 
 .panel:not([data-open]) {

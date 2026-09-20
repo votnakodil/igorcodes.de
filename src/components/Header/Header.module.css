@@ -218,6 +218,7 @@
 
 .settings {
     --settings-button-width: 91.75px;
+    --settings-panel-overhang: 100.125px;
     position: relative;
     flex: 0 0 var(--settings-button-width);
     width: var(--settings-button-width);
@@ -226,14 +227,17 @@
     margin-right: 5px;
 }
 
-.settings[data-language="ru"] { --settings-button-width: 110.53125px; }
+.settings[data-language="ru"] {
+    --settings-button-width: 110.53125px;
+    --settings-panel-overhang: 90.734375px;
+}
 
 .settingsGoo {
     position: absolute !important;
     top: 0;
-    right: 0;
-    width: 391px;
-    height: 238px;
+    right: calc(0px - var(--settings-panel-overhang));
+    width: calc(391px + var(--settings-panel-overhang));
+    height: 264px;
     z-index: 2100;
     overflow: visible !important;
     pointer-events: none;
@@ -252,7 +256,7 @@
 .settingsButton {
     position: absolute;
     top: 0;
-    right: 0;
+    right: var(--settings-panel-overhang);
     box-sizing: border-box;
     width: var(--settings-button-width);
     height: 31px;
@@ -282,18 +286,8 @@
     flex-shrink: 0;
     width: 15px;
     height: 15px;
-}
-
-.settingsIconOverlay {
-    position: absolute;
-    top: 7.5px;
-    left: 9px;
-    z-index: 2305;
-    width: 15px;
-    height: 15px;
     display: grid;
     place-items: center;
-    color: #ffffff;
     pointer-events: none;
 }
 
@@ -315,18 +309,17 @@
     color: #ffffff;
 }
 
-.settingsIconOverlayOpen .settingsIconRotor { transform: rotate(360.001deg); }
+.settingsIconSlotOpen .settingsIconRotor { transform: rotate(360.001deg); }
 
 .settingsPanel {
     position: absolute;
     top: 64px;
-    right: calc((var(--settings-button-width) - 292px) / 2);
+    right: 0;
     z-index: 2;
     pointer-events: auto;
     width: 292px;
     max-width: calc(100vw - 28px);
     height: 200px;
-    transform-origin: 50% -17px;
     color: #ffffff;
     overflow: hidden;
     border-radius: 24px;
@@ -400,12 +393,6 @@
 
 }
 
-@media (max-width: 1397px) {
-    .settingsPanel {
-        right: 0;
-    }
-}
-
 @media (max-width: 639px) {
     .right {
         gap: 9px;
@@ -420,6 +407,7 @@
     }
 
     .settings {
+        --settings-panel-overhang: 0px;
         flex-basis: 40px;
         width: 40px;
         height: 40px;

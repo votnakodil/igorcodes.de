@@ -18,6 +18,29 @@ export const liquidPopoverMorph = {
     },
 } as const;
 
+export const settingsLiquidPopoverMorph = {
+    shape: true,
+    speed: 1.55,
+    bounce: 0.3,
+    contentBlur: 0,
+    advanced: {
+        bridgeGrow: 10,
+        evolve: {
+            anticipation: 0.04,
+            travel: 0.08,
+            cornerDuration: 90,
+        },
+    },
+} as const;
+
+export const resumeLiquidPopoverMorph = {
+    ...settingsLiquidPopoverMorph,
+    advanced: {
+        ...settingsLiquidPopoverMorph.advanced,
+        bridgeGrow: 0,
+    },
+} as const;
+
 export const liquidPopoverItemTransition = {
     duration: 270,
     ease: "cubic-bezier(.22,1,.36,1)",
