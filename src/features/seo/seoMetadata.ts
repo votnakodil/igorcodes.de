@@ -9,12 +9,12 @@ export type SeoMetadata = {
 const SEO_METADATA: Record<Language, SeoMetadata> = {
     en: {
         title: "Igor Volkov — Developer",
-        description: "Personal website and portfolio of Igor Volkov, a developer creating mobile and web experiences.",
+        description: "A personal website showcasing my journey through the world of software development.",
         locale: "en_US",
     },
     ru: {
         title: "Игорь Волков — Разработчик",
-        description: "Личный сайт и портфолио Игоря Волкова — разработчика мобильных и веб-продуктов.",
+        description: "Сайт-визитка моего пути в мире программной разработки",
         locale: "ru_RU",
     },
 };

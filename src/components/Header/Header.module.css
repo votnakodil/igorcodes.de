@@ -66,6 +66,7 @@
 }
 
 .right {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -101,8 +102,8 @@
     position: absolute !important;
     top: 0;
     right: 0;
-    width: 260px;
-    height: 248px;
+    width: 320px;
+    height: 300px;
     z-index: 2100;
     overflow: visible !important;
     pointer-events: none;
@@ -133,6 +134,7 @@
     color: #ffffff;
     background: var(--color-button);
     cursor: pointer;
+    z-index: 10000;
     pointer-events: auto;
     transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
@@ -174,16 +176,16 @@
 .menuPanel {
     position: absolute;
     top: 64px;
-    right: 0;
+    right: -49px;
     z-index: 2;
     width: 224px;
     height: 210px;
     overflow: hidden;
     border-radius: 24px;
     color: #ffffff;
-    background: transparent;
+    background: var(--color-button);
     pointer-events: auto;
-    transform-origin: calc(100% - 15px) -17px;
+    transform-origin: 50% 50%;
 }
 
 .menuContent {
@@ -364,6 +366,13 @@
 .popoverContent :global([role="radio"]) { color: #ffffff; }
 .popoverContent :global([role="radio"] > span:first-child:not(:last-child)) { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.22); box-shadow: 0 2px 8px rgba(0,0,0,.12); }
 
+@media (max-width: 1390px) {
+    .settings,
+    .settings[data-language="ru"] {
+        --settings-panel-overhang: 0px;
+    }
+}
+
 @media (max-width: 1023px) {
     .inner {
         height: 60px;
@@ -404,7 +413,6 @@
     }
 
     .settings {
-        --settings-panel-overhang: 0px;
         flex-basis: 40px;
         width: 40px;
         height: 40px;

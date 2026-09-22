@@ -1,6 +1,6 @@
 import { LanguageSwitcher } from "@/features/language/LanguageSwitcher";
 import { useTranslation } from "@/features/language/useTranslation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Liquid } from "liquid-gooey";
 import { IconGear, IconLaurelLeading, IconLaurelTrailing, IconLine3Horizontal, IconXmark } from "symbols-react";
@@ -8,12 +8,7 @@ import { IconGear, IconLaurelLeading, IconLaurelTrailing, IconLine3Horizontal, I
 import { ThemeSwitcher } from "@/features/theme/ThemeSwitcher/ThemeSwitcher";
 import { trackGoal } from "@/features/analytics/yandexMetrika";
 import {
-    liquidPopoverContentExit,
-    liquidPopoverContentTransition,
-    liquidPopoverExitTransition,
     liquidPopoverItemTransition,
-    liquidPopoverMorph,
-    liquidPopoverPanelTransition,
     settingsLiquidPopoverMorph,
 } from "@/motion/liquidPopover";
 
@@ -30,6 +25,50 @@ const settingsPanelSpring = {
 const settingsPanelExitSpring = {
     ...settingsPanelSpring,
     delay: 0.07,
+} as const;
+
+const menuPanelExitSpring = {
+    ...settingsPanelSpring,
+    damping: 30,
+    delay: 0.07,
+} as const;
+
+const menuPanelTransition = {
+    width: settingsPanelSpring,
+    height: settingsPanelSpring,
+    x: settingsPanelSpring,
+    y: settingsPanelSpring,
+    scale: {
+        type: "spring",
+        stiffness: 210,
+        damping: 10.5,
+        mass: 0.8,
+    },
+    borderRadius: {
+        type: "tween",
+        duration: 0.46,
+        ease: [0.22, 1, 0.36, 1],
+    },
+} as const;
+
+const menuPanelExitTransition = {
+    width: menuPanelExitSpring,
+    height: menuPanelExitSpring,
+    x: menuPanelExitSpring,
+    y: menuPanelExitSpring,
+    scale: {
+        type: "spring",
+        stiffness: 210,
+        damping: 10.5,
+        mass: 0.8,
+        delay: 0.07,
+    },
+    borderRadius: {
+        type: "tween",
+        duration: 0.42,
+        delay: 0.07,
+        ease: [0.22, 1, 0.36, 1],
+    },
 } as const;
 
 const settingsContentSpring = {
@@ -50,19 +89,43 @@ const settingsContentExitSpring = {
 export function Header() {
     const { t, language } = useTranslation();
     const [activePopover, setActivePopover] = useState<HeaderPopover>(null);
-    const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" && window.scrollY > 1);
+    const [scrolled, setScrolled] = useState(false);
+    const [menuPanelWidth, setMenuPanelWidth] = useState(224);
+    const headerRef = useRef<HTMLElement>(null);
     const controlsRef = useRef<HTMLDivElement>(null);
     const menuOpen = activePopover === "menu";
     const settingsOpen = activePopover === "settings";
     const compactSettings = typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
+    const insetSettingsPanel = typeof window !== "undefined" && window.matchMedia("(max-width: 1390px)").matches;
     const settingsGooWidth = typeof window !== "undefined" ? Math.min(292, Math.max(0, window.innerWidth - 28)) : 292;
     const settingsButtonWidth = compactSettings ? 40 : language === "ru" ? 110.53125 : 91.75;
     // Start the panel as a small blob centred beneath the Settings control.
     // The liquid-gooey surface follows this element continuously as it grows.
-    const settingsDropX = compactSettings
+    const settingsDropX = insetSettingsPanel
         ? 9 - settingsButtonWidth / 2
         : 9 - settingsGooWidth / 2;
     const settingsDropY = compactSettings ? -53 : -57.5;
+    const menuDropX = -60;
+    const menuDropY = -53;
+
+    useLayoutEffect(() => {
+        if (window.scrollY === 0) window.scrollTo(0, 1);
+    }, []);
+
+    useLayoutEffect(() => {
+        const updateMenuPanelWidth = () => {
+            const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+            setMenuPanelWidth(Math.min(224, Math.max(0, viewportWidth - 40)));
+        };
+
+        updateMenuPanelWidth();
+        window.addEventListener("resize", updateMenuPanelWidth);
+        window.visualViewport?.addEventListener("resize", updateMenuPanelWidth);
+        return () => {
+            window.removeEventListener("resize", updateMenuPanelWidth);
+            window.visualViewport?.removeEventListener("resize", updateMenuPanelWidth);
+        };
+    }, []);
 
     const closePopovers = useCallback(() => {
         if (!activePopover) return;
@@ -70,10 +133,25 @@ export function Header() {
     }, [activePopover]);
 
     useEffect(() => {
-        const updateScrolled = () => setScrolled(window.scrollY > 1);
+        const updateScrolled = () => {
+            const header = headerRef.current;
+            const trigger = document.querySelector<HTMLElement>("[data-header-blur-trigger]");
+
+            if (!header || !trigger) {
+                setScrolled(false);
+                return;
+            }
+
+            setScrolled(trigger.getBoundingClientRect().top <= header.getBoundingClientRect().bottom);
+        };
+
         updateScrolled();
         window.addEventListener("scroll", updateScrolled, { passive: true });
-        return () => window.removeEventListener("scroll", updateScrolled);
+        window.addEventListener("resize", updateScrolled);
+        return () => {
+            window.removeEventListener("scroll", updateScrolled);
+            window.removeEventListener("resize", updateScrolled);
+        };
     }, []);
 
     useEffect(() => {
@@ -93,7 +171,7 @@ export function Header() {
     }, [closePopovers]);
 
     return (
-        <header className={styles.header} data-scrolled={scrolled || undefined}>
+        <header ref={headerRef} className={styles.header} data-scrolled={scrolled || undefined}>
             <div className={styles.inner}>
                 <a className={styles.brand} href="/" aria-label={t("name__title")}>
                     <IconLaurelLeading className={styles.brandLaurel} fill="currentColor" aria-hidden="true" />
@@ -138,25 +216,37 @@ export function Header() {
                             </Liquid.Item>
                             <AnimatePresence>
                                 {menuOpen && (
-                                    <Liquid.Item morph={liquidPopoverMorph} transition={liquidPopoverItemTransition}>
-                                        <motion.nav id="mobile-navigation" className={styles.menuPanel}
-                                            aria-label={t("navigation")}
-                                            initial={{ width: 18, height: 18, x: 0, y: -58, borderRadius: 999 }}
-                                            animate={{ width: 224, height: 210, x: 0, y: 0, borderRadius: 24 }}
-                                            exit={{ width: 18, height: 18, x: 0, y: -58, borderRadius: 999,
-                                                transition: liquidPopoverExitTransition }}
-                                            transition={liquidPopoverPanelTransition}>
-                                            <motion.div className={styles.menuContent}
-                                                initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
-                                                exit={liquidPopoverContentExit}
-                                                transition={liquidPopoverContentTransition}>
-                                                <a href="#projects" onClick={closePopovers}>{t("link1")}</a>
-                                                <a href="#about" onClick={closePopovers}>{t("link2")}</a>
-                                                <a href="#experience" onClick={closePopovers}>{t("link3")}</a>
-                                                <a href="#contact" onClick={closePopovers}>{t("link4")}</a>
-                                            </motion.div>
-                                        </motion.nav>
-                                    </Liquid.Item>
+                                    <motion.nav id="mobile-navigation" className={styles.menuPanel}
+                                        aria-label={t("navigation")}
+                                        initial={{ width: 18, height: 18, x: menuDropX, y: menuDropY, scale: 0.88, borderRadius: 999 }}
+                                        animate={{ width: menuPanelWidth, height: 210, x: 0, y: 0, scale: 1, borderRadius: 24 }}
+                                        exit={{ width: 18, height: 18, x: menuDropX, y: menuDropY, scale: 0.88, borderRadius: 999,
+                                            transition: menuPanelExitTransition }}
+                                        transition={menuPanelTransition}>
+                                        <motion.div className={styles.menuContent}
+                                            initial={{ opacity: 0, y: 14, scale: 0.9 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{
+                                                opacity: 0,
+                                                y: -6,
+                                                scale: 0.95,
+                                                transition: {
+                                                    opacity: { duration: 0.08 },
+                                                    y: settingsContentExitSpring,
+                                                    scale: settingsContentExitSpring,
+                                                },
+                                            }}
+                                            transition={{
+                                                opacity: { duration: 0.18, delay: 0.22, ease: "easeOut" },
+                                                y: settingsContentSpring,
+                                                scale: settingsContentSpring,
+                                            }}>
+                                            <a href="#projects" onClick={closePopovers}>{t("link1")}</a>
+                                            <a href="#about" onClick={closePopovers}>{t("link2")}</a>
+                                            <a href="#experience" onClick={closePopovers}>{t("link3")}</a>
+                                            <a href="#contact" onClick={closePopovers}>{t("link4")}</a>
+                                        </motion.div>
+                                    </motion.nav>
                                 )}
                             </AnimatePresence>
                         </Liquid>

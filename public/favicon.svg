@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="favicon-title">
     <title id="favicon-title">IV</title>
-    <rect width="512" height="512" rx="104" fill="#fff" />
     <g fill="#0071e3">
         <path d="M68 96h110v58h-27v204h27v58H68v-58h27V154H68z" />
         <path d="M190 96h80l72 212 72-212h80L370 416h-56z" />

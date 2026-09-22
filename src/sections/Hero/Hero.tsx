@@ -34,7 +34,7 @@ export function Hero() {
         <section className={styles.hero}>
             <div className={styles.glow} aria-hidden="true" />
 
-            <div className={styles.inner} style={{ backgroundImage: `url(${portrait})` }}>
+            <div data-header-blur-trigger className={styles.inner} style={{ backgroundImage: `url(${portrait})` }}>
                 <div className={styles.copy}>
                     <motion.p
                         className={styles.eyebrow}
