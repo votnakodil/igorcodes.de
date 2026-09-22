@@ -108,48 +108,6 @@ export function Header() {
     const menuDropX = -60;
     const menuDropY = -53;
 
-    useEffect(() => {
-        let firstFrame = 0;
-        let secondFrame = 0;
-
-        const activateSafariToolbarMaterial = () => {
-            cancelAnimationFrame(firstFrame);
-            cancelAnimationFrame(secondFrame);
-
-            firstFrame = requestAnimationFrame(() => {
-                secondFrame = requestAnimationFrame(() => {
-                    if (window.scrollY > 2) return;
-
-                    // Safari only enables its translucent toolbar material once
-                    // the document has moved. Toggle between two imperceptible
-                    // offsets so restored tabs also receive a real scroll update.
-                    window.scrollTo({
-                        top: window.scrollY === 1 ? 2 : 1,
-                        left: window.scrollX,
-                        behavior: "instant",
-                    });
-                });
-            });
-        };
-
-        const handleVisibilityChange = () => {
-            if (document.visibilityState === "visible") activateSafariToolbarMaterial();
-        };
-
-        activateSafariToolbarMaterial();
-        window.addEventListener("load", activateSafariToolbarMaterial);
-        window.addEventListener("pageshow", activateSafariToolbarMaterial);
-        document.addEventListener("visibilitychange", handleVisibilityChange);
-
-        return () => {
-            cancelAnimationFrame(firstFrame);
-            cancelAnimationFrame(secondFrame);
-            window.removeEventListener("load", activateSafariToolbarMaterial);
-            window.removeEventListener("pageshow", activateSafariToolbarMaterial);
-            document.removeEventListener("visibilitychange", handleVisibilityChange);
-        };
-    }, []);
-
     useLayoutEffect(() => {
         const updateMenuPanelWidth = () => {
             const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
